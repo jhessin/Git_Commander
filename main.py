@@ -7,7 +7,6 @@ from PyQt6.QtWidgets import (
     QApplication, QMainWindow,
     QPushButton, QListWidget, QListWidgetItem, QMenuBar, QStatusBar,
 )
-from PyQt6.QtCore import QModelIndex
 
 
 class MainWindow(QMainWindow):
@@ -30,16 +29,21 @@ class MainWindow(QMainWindow):
 
         uic.loadUi('MainWindow.ui', self)
 
+        self.repoList.setSelectionMode(QListWidget.SelectionMode.ExtendedSelection)
+
         self.searchButton.clicked.connect(self.search_for_repos)
-        self.repoList.itemClicked.connect(self.repo_selected)
+        self.rmRepo.clicked.connect(self.rm_repo)
 
     def search_for_repos(self):
-        values = ['one', 'two', 'three']
-        for i in values:
-            self.repoList.addItem(QListWidgetItem(i))
+        home = os.path.expanduser('~')
+        for root, dirs, files in os.walk(home):
+            if '.git' in dirs:
+                self.repoList.addItem(root)
 
-    def repo_selected(self, item: QListWidgetItem):
-        print(item.text())
+    def rm_repo(self):
+        for item in self.repoList.selectedItems():
+            row = self.repoList.row(item)
+            self.repoList.takeItem(row)
 
 
 if __name__ == "__main__":
