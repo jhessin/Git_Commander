@@ -39,10 +39,15 @@ def load_repos() -> list[str]:
         return []
 
 
-def save_repos(data: QListWidget):
+def list_repos(data: QListWidget) -> list[str]:
     items = []
     for i in range(data.count()):
         items.append(data.item(i).text())
+    return items
+
+
+def save_repos(data: QListWidget):
+    items = list_repos(data)
     try:
         with open(PICKLE_FILE, 'wb') as file:
             dump(items, file, pickle.HIGHEST_PROTOCOL)
@@ -51,10 +56,23 @@ def save_repos(data: QListWidget):
         sys.exit()
 
 
+def push_repo(path: str):
+    # TODO: commit all and push the repo
+    print(f"committing and pushing {path}")
+    pass
+
+
+def pull_repo(path: str):
+    # TODO: pull the given repo
+    print(f"pulling {path}")
+    pass
+
+
 class RepoSearch(QRunnable):
     """
     Search for repos asyncronously and return them when we are done.
     """
+
     class Signals(QObject):
         result = pyqtSignal(str)
 
@@ -97,6 +115,10 @@ class MainWindow(QMainWindow):
 
         self.threadpool = QThreadPool()
 
+        self.pullAllButton.clicked.connect(self.pull_all)
+        self.pullRepoButton.clicked.connect(self.pull_selected)
+        self.pushAllButton.clicked.connect(self.push_all)
+        self.pushRepoButton.clicked.connect(self.push_selected)
         self.searchButton.clicked.connect(self.search_for_repos)
         self.rmRepo.clicked.connect(self.rm_repo)
 
@@ -115,6 +137,26 @@ class MainWindow(QMainWindow):
             row = self.repoList.row(item)
             self.repoList.takeItem(row)
         save_repos(self.repoList)
+
+    def push_all(self):
+        repos = list_repos(self.repoList)
+        for repo in repos:
+            push_repo(repo)
+
+    def pull_all(self):
+        repos = list_repos(self.repoList)
+        for repo in repos:
+            pull_repo(repo)
+
+    def push_selected(self):
+        repos = self.repoList.selectedItems()
+        for repo in repos:
+            push_repo(repo.text())
+
+    def pull_selected(self):
+        repos = self.repoList.selectedItems()
+        for repo in repos:
+            pull_repo(repo.text())
 
 
 if __name__ == "__main__":
