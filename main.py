@@ -4,6 +4,7 @@ import subprocess
 import os
 import pickle
 import sys
+from datetime import datetime
 
 from pickle import dump, load
 from PyQt6 import uic
@@ -59,14 +60,16 @@ def save_repos(data: QListWidget):
 def push_repo(path: str):
     print(f"committing and pushing {path}")
     # TODO: commit all and push the repo
-    subprocess.run('date', capture_output=True)
-    pass
+    date = datetime.now()
+    subprocess.run('git add .', cwd=path)
+    subprocess.run(f"git commit -m \"{date}\"", cwd=path)
+    subprocess.run('git push', cwd=path)
 
 
 def pull_repo(path: str):
     print(f"pulling {path}")
     # TODO: pull the given repo
-    pass
+    subprocess.run('git pull', cwd=path)
 
 
 class RepoSearch(QRunnable):
