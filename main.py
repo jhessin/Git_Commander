@@ -1,4 +1,5 @@
 # This Python file uses the following encoding: utf-8
+import logging
 import mimetypes
 import os
 import pickle
@@ -6,13 +7,28 @@ import sys
 
 from pickle import dump, load
 from PyQt6 import uic
-from PyQt6.QtCore import QMimeData, QMimeType
+from PyQt6.QtCore import QMimeData, QMimeType, QObject, pyqtSignal, QRunnable, pyqtSlot, QThreadPool, Qt
 from PyQt6.QtWidgets import (
     QApplication, QMainWindow,
-    QPushButton, QListWidget, QListWidgetItem, QMenuBar, QStatusBar,
+    QPushButton, QListWidget, QListWidgetItem, QMenuBar, QStatusBar, QPlainTextEdit,
 )
 
 PICKLE_FILE = 'repos.dat'
+
+
+class QTextEditLogger(logging.Handler, QObject):
+    appendPlainText = pyqtSignal(str)
+
+    def __init__(self, parent):
+        super().__init__()
+        QObject.__init__(self)
+        self.widget = QPlainTextEdit(parent)
+        self.widget.setReadOnly(True)
+        self.appendPlainText.connect(self.widget.appendPlainText)
+
+    def emit(self, record):
+        msg = self.format(record)
+        self.appendPlainText.emit(msg)
 
 
 def load_repos() -> list[str]:
@@ -33,6 +49,25 @@ def save_repos(data: QListWidget):
     except Exception as e:
         print(e)
         sys.exit()
+
+
+class RepoSearch(QRunnable):
+    """
+    Search for repos asyncronously and return them when we are done.
+    """
+    class Signals(QObject):
+        result = pyqtSignal(str)
+
+    signals = Signals()
+
+    @pyqtSlot()
+    def run(self):
+        home = os.path.expanduser('~')
+        repo_list = []
+        for root, dirs, files in os.walk(home):
+            if '.git' in dirs:
+                repo_list.append(root)
+                self.signals.result.emit(root)
 
 
 class MainWindow(QMainWindow):
@@ -56,18 +91,24 @@ class MainWindow(QMainWindow):
         uic.loadUi('MainWindow.ui', self)
 
         self.repoList.setSelectionMode(QListWidget.SelectionMode.ExtendedSelection)
+        self.repoList.setSortingEnabled(True)
 
         self.repoList.addItems(load_repos())
+
+        self.threadpool = QThreadPool()
 
         self.searchButton.clicked.connect(self.search_for_repos)
         self.rmRepo.clicked.connect(self.rm_repo)
 
     def search_for_repos(self):
-        home = os.path.expanduser('~')
-        for root, dirs, files in os.walk(home):
-            if '.git' in dirs:
-                self.repoList.addItem(root)
-        save_repos(self.repoList)
+        worker = RepoSearch()
+        worker.signals.result.connect(self.add_to_repo_list)
+        self.threadpool.start(worker)
+
+    def add_to_repo_list(self, item: str):
+        if len(self.repoList.findItems(item, Qt.MatchFlag.MatchExactly)) == 0:
+            self.repoList.addItem(item)
+            save_repos(self.repoList)
 
     def rm_repo(self):
         for item in self.repoList.selectedItems():
