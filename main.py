@@ -146,21 +146,25 @@ class MainWindow(QMainWindow):
         repos = list_repos(self.repoList)
         for repo in repos:
             push_repo(repo)
+        print('Finished Pushing all repos')
 
     def pull_all(self):
         repos = list_repos(self.repoList)
         for repo in repos:
             pull_repo(repo)
+        print('Finished Pulling all repos')
 
     def push_selected(self):
         repos = self.repoList.selectedItems()
         for repo in repos:
             push_repo(repo.text())
+        print('Finished pushing selected repos')
 
     def pull_selected(self):
         repos = self.repoList.selectedItems()
         for repo in repos:
             pull_repo(repo.text())
+        print('Finished pulling selected repos')
 
 
 if __name__ == "__main__":
