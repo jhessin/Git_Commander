@@ -11,7 +11,7 @@ from PyQt6 import uic
 from PyQt6.QtCore import QMimeData, QMimeType, QObject, pyqtSignal, QRunnable, pyqtSlot, QThreadPool, Qt
 from PyQt6.QtWidgets import (
     QApplication, QMainWindow,
-    QPushButton, QListWidget, QListWidgetItem, QMenuBar, QStatusBar, QPlainTextEdit,
+    QPushButton, QListWidget, QListWidgetItem, QMenuBar, QStatusBar, QPlainTextEdit, QFileDialog,
 )
 
 PICKLE_FILE = 'repos.dat'
@@ -125,6 +125,7 @@ class MainWindow(QMainWindow):
         self.pushRepoButton.clicked.connect(self.push_selected)
         self.searchButton.clicked.connect(self.search_for_repos)
         self.rmRepo.clicked.connect(self.rm_repo)
+        self.addRepo.clicked.connect(self.manual_repo_add)
 
     def search_for_repos(self):
         worker = RepoSearch()
@@ -135,6 +136,15 @@ class MainWindow(QMainWindow):
         if len(self.repoList.findItems(item, Qt.MatchFlag.MatchExactly)) == 0:
             self.repoList.addItem(item)
             save_repos(self.repoList)
+
+    def manual_repo_add(self):
+        home = os.path.expanduser('~')
+        dialog = QFileDialog(self)
+        dialog.setFileMode(QFileDialog.FileMode.Directory)
+        if dialog.exec():
+            directories = dialog.selectedFiles()
+            for directory in directories:
+                self.add_to_repo_list(directory)
 
     def rm_repo(self):
         for item in self.repoList.selectedItems():
