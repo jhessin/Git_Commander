@@ -1,6 +1,6 @@
 # This Python file uses the following encoding: utf-8
 import logging
-import mimetypes
+import subprocess
 import os
 import pickle
 import sys
@@ -57,14 +57,15 @@ def save_repos(data: QListWidget):
 
 
 def push_repo(path: str):
-    # TODO: commit all and push the repo
     print(f"committing and pushing {path}")
+    # TODO: commit all and push the repo
+    subprocess.run('date', capture_output=True)
     pass
 
 
 def pull_repo(path: str):
-    # TODO: pull the given repo
     print(f"pulling {path}")
+    # TODO: pull the given repo
     pass
 
 
