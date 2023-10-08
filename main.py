@@ -21,10 +21,18 @@ def resource_path(*relative_path: str) -> os.path:
     return os.path.join(base_path, *relative_path)
 
 
-if not os.path.isdir(resource_path('data')):
-    os.mkdir(resource_path('data'))
+def data_path(*relative_path: str) -> os.path:
+    """
+    Get the absolute path of the data file from configuration.
+    :param relative_path: The relative path of the data object you want
+    :return: The absolute path within the config directory
+    """
+    base_path = getattr(sys, 'PKG_CONFIG_PATH', os.path.join(os.path.expanduser('~'), '.config', 'GitCommander'))
+    os.makedirs(base_path, exist_ok=True)
+    return os.path.join(base_path, *relative_path)
 
-PICKLE_FILE = resource_path('data', 'repos.dat')
+
+PICKLE_FILE = data_path('repos.dat')
 
 
 class QTextEditLogger(logging.Handler, QObject):
