@@ -15,10 +15,10 @@ from PyQt6.QtWidgets import (
 )
 
 
-def resource_path(relative_path: str):
+def ui_path(relative_path: str):
     """ Get absolute path to resource, works for dev and for PyInstaller """
     base_path = getattr(sys, '_MEIPASS', os.path.dirname(os.path.abspath(__file__)))
-    return os.path.join(base_path, relative_path)
+    return os.path.join(base_path, 'ui', relative_path)
 
 
 PICKLE_FILE = 'repos.dat'
@@ -117,7 +117,7 @@ class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
 
-        uic.loadUi(resource_path('MainWindow.ui'), self)
+        uic.loadUi(ui_path('MainWindow.ui'), self)
 
         self.repoList.setSelectionMode(QListWidget.SelectionMode.ExtendedSelection)
         self.repoList.setSortingEnabled(True)
