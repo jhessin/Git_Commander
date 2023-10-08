@@ -144,7 +144,7 @@ class MainWindow(QMainWindow):
         if dialog.exec():
             directories = dialog.selectedFiles()
             for directory in directories:
-                self.add_to_repo_list(directory)
+                self.add_to_repo_list(os.path.abspath(directory))
 
     def rm_repo(self):
         for item in self.repoList.selectedItems():

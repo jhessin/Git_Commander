@@ -39,7 +39,35 @@
     <item row="1" column="1">
      <layout class="QHBoxLayout" name="horizontalLayout">
       <item>
+       <spacer name="horizontalSpacer">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeType">
+         <enum>QSizePolicy::MinimumExpanding</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>60</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item>
        <widget class="QPushButton" name="rmRepo">
+        <property name="maximumSize">
+         <size>
+          <width>50</width>
+          <height>50</height>
+         </size>
+        </property>
+        <property name="toolTip">
+         <string/>
+        </property>
+        <property name="statusTip">
+         <string extracomment="Remove repository"/>
+        </property>
         <property name="text">
          <string>-</string>
         </property>
@@ -47,6 +75,18 @@
       </item>
       <item>
        <widget class="QPushButton" name="addRepo">
+        <property name="maximumSize">
+         <size>
+          <width>50</width>
+          <height>50</height>
+         </size>
+        </property>
+        <property name="toolTip">
+         <string/>
+        </property>
+        <property name="statusTip">
+         <string extracomment="Add a new repository"/>
+        </property>
         <property name="text">
          <string>+</string>
         </property>
@@ -56,6 +96,9 @@
     </item>
     <item row="1" column="0">
      <widget class="QPushButton" name="searchButton">
+      <property name="statusTip">
+       <string extracomment="Search your home folder for git repositories."/>
+      </property>
       <property name="text">
        <string>Search for Repos</string>
       </property>
@@ -71,7 +114,7 @@
       </property>
       <layout class="QVBoxLayout" name="verticalLayout">
        <item>
-        <widget class="QWidget" name="" native="true">
+        <widget class="QWidget" name="widget" native="true">
          <property name="maximumSize">
           <size>
            <width>200</width>
@@ -93,6 +136,9 @@
               <height>25</height>
              </size>
             </property>
+            <property name="statusTip">
+             <string extracomment="Pull selected repositories "/>
+            </property>
             <property name="text">
              <string>Pull</string>
             </property>
@@ -112,6 +158,9 @@
               <height>25</height>
              </size>
             </property>
+            <property name="statusTip">
+             <string extracomment="Pull ALL shown repositories"/>
+            </property>
             <property name="text">
              <string>Pull All</string>
             </property>
@@ -121,7 +170,7 @@
         </widget>
        </item>
        <item>
-        <widget class="QWidget" name="" native="true">
+        <widget class="QWidget" name="widget" native="true">
          <property name="maximumSize">
           <size>
            <width>200</width>
@@ -143,6 +192,9 @@
               <height>25</height>
              </size>
             </property>
+            <property name="statusTip">
+             <string extracomment="Push selected repositories upstream"/>
+            </property>
             <property name="text">
              <string>Push</string>
             </property>
@@ -161,6 +213,9 @@
               <width>100</width>
               <height>25</height>
              </size>
+            </property>
+            <property name="statusTip">
+             <string extracomment="Push ALL shown repositories upstream"/>
             </property>
             <property name="text">
              <string>Push All</string>
@@ -204,7 +259,23 @@
     </rect>
    </property>
   </widget>
-  <widget class="QStatusBar" name="statusbar"/>
+  <widget class="QStatusBar" name="statusbar">
+   <property name="minimumSize">
+    <size>
+     <width>0</width>
+     <height>0</height>
+    </size>
+   </property>
+   <property name="baseSize">
+    <size>
+     <width>0</width>
+     <height>50</height>
+    </size>
+   </property>
+   <property name="sizeGripEnabled">
+    <bool>true</bool>
+   </property>
+  </widget>
  </widget>
  <resources/>
  <connections/>
