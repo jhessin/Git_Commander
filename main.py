@@ -1,27 +1,30 @@
 # This Python file uses the following encoding: utf-8
 import logging
-import subprocess
 import os
 import pickle
+import subprocess
 import sys
 from datetime import datetime
-
 from pickle import dump, load
+
 from PyQt6 import uic
-from PyQt6.QtCore import QMimeData, QMimeType, QObject, pyqtSignal, QRunnable, pyqtSlot, QThreadPool, Qt
+from PyQt6.QtCore import QObject, pyqtSignal, QRunnable, pyqtSlot, QThreadPool, Qt
 from PyQt6.QtWidgets import (
     QApplication, QMainWindow,
-    QPushButton, QListWidget, QListWidgetItem, QMenuBar, QStatusBar, QPlainTextEdit, QFileDialog,
+    QPushButton, QListWidget, QMenuBar, QStatusBar, QPlainTextEdit, QFileDialog,
 )
 
 
-def ui_path(relative_path: str):
+def resource_path(*relative_path: str) -> os.path:
     """ Get absolute path to resource, works for dev and for PyInstaller """
     base_path = getattr(sys, '_MEIPASS', os.path.dirname(os.path.abspath(__file__)))
-    return os.path.join(base_path, 'ui', relative_path)
+    return os.path.join(base_path, *relative_path)
 
 
-PICKLE_FILE = 'repos.dat'
+if not os.path.isdir(resource_path('data')):
+    os.mkdir(resource_path('data'))
+
+PICKLE_FILE = resource_path('data', 'repos.dat')
 
 
 class QTextEditLogger(logging.Handler, QObject):
@@ -68,8 +71,8 @@ def push_repo(path: str):
     print(f"committing and pushing {path}")
     # TODO: commit all and push the repo
     date = datetime.now()
-    subprocess.run(['git',  'add', '.'], cwd=path)
-    subprocess.run(['git', 'commit',  f'-m "{date}"'], cwd=path)
+    subprocess.run(['git', 'add', '.'], cwd=path)
+    subprocess.run(['git', 'commit', f'-m "{date}"'], cwd=path)
     subprocess.run(['git', 'push'], cwd=path)
 
 
@@ -81,7 +84,7 @@ def pull_repo(path: str):
 
 class RepoSearch(QRunnable):
     """
-    Search for repos asyncronously and return them when we are done.
+    Search for repos asynchronously and return them when we are done.
     """
 
     class Signals(QObject):
@@ -117,7 +120,7 @@ class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
 
-        uic.loadUi(ui_path('MainWindow.ui'), self)
+        uic.loadUi(resource_path('ui', 'MainWindow.ui'), self)
 
         self.repoList.setSelectionMode(QListWidget.SelectionMode.ExtendedSelection)
         self.repoList.setSortingEnabled(True)
@@ -145,7 +148,6 @@ class MainWindow(QMainWindow):
             save_repos(self.repoList)
 
     def manual_repo_add(self):
-        home = os.path.expanduser('~')
         dialog = QFileDialog(self)
         dialog.setFileMode(QFileDialog.FileMode.Directory)
         if dialog.exec():
