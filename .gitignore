@@ -77,4 +77,5 @@ CMakeLists.txt.user*
 build/
 dist/
 
+data/
 repos.dat
