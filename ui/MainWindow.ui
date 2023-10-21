@@ -247,6 +247,13 @@
     <item row="0" column="0" colspan="2">
      <widget class="QListWidget" name="repoList"/>
     </item>
+    <item row="1" column="2">
+     <widget class="QPushButton" name="cloneRepoButton">
+      <property name="text">
+       <string>Clone</string>
+      </property>
+     </widget>
+    </item>
    </layout>
   </widget>
   <widget class="QMenuBar" name="menubar">

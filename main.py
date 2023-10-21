@@ -11,7 +11,8 @@ from PyQt6 import uic
 from PyQt6.QtCore import QObject, pyqtSignal, QRunnable, pyqtSlot, QThreadPool, Qt
 from PyQt6.QtWidgets import (
     QApplication, QMainWindow,
-    QPushButton, QListWidget, QMenuBar, QStatusBar, QPlainTextEdit, QFileDialog,
+    QPushButton, QListWidget, QMenuBar, QStatusBar, QPlainTextEdit, QFileDialog, QDialog, QDialogButtonBox,
+    QListWidgetItem,
 )
 
 
@@ -33,6 +34,7 @@ def data_path(*relative_path: str) -> os.path:
 
 
 PICKLE_FILE = data_path('repos.dat')
+REPOS_DIRECTORY = os.path.join(os.path.expanduser('~'), 'repos')
 
 
 class QTextEditLogger(logging.Handler, QObject):
@@ -75,9 +77,17 @@ def save_repos(data: QListWidget):
         sys.exit()
 
 
+def clone(repo_name: str) -> str:
+    print(REPOS_DIRECTORY)
+    os.makedirs(REPOS_DIRECTORY, exist_ok=True)
+    path = os.path.join(REPOS_DIRECTORY, repo_name.split('/')[-1])
+    print(f'cloning repo {repo_name} to {path}')
+    subprocess.run(['gh', 'repo', 'clone', repo_name, path])
+    return path
+
+
 def push_repo(path: str):
     print(f"committing and pushing {path}")
-    # TODO: commit all and push the repo
     date = datetime.now()
     subprocess.run(['git', 'add', '.'], cwd=path)
     subprocess.run(['git', 'commit', f'-m "{date}"'], cwd=path)
@@ -86,7 +96,6 @@ def push_repo(path: str):
 
 def pull_repo(path: str):
     print(f"pulling {path}")
-    # TODO: pull the given repo
     subprocess.run(['git', 'pull'], cwd=path)
 
 
@@ -110,6 +119,42 @@ class RepoSearch(QRunnable):
                 self.signals.result.emit(root)
 
 
+class RepoSelector(QDialog):
+    buttonBox: QDialogButtonBox
+    repoList: QListWidget
+
+    def __init__(self):
+        super().__init__()
+        uic.loadUi(resource_path('ui', 'RepoSelector.ui'), self)
+        self.result: str = ''
+        repo_list: list[str] = subprocess.run(
+            ['gh', 'repo', 'list'],
+            capture_output=True,
+            encoding='utf-8').stdout.splitlines()
+        for repo in repo_list:
+            result: str = ''
+            for char in repo:
+                if char == '\t':
+                    break
+                else:
+                    result += char
+            self.add_to_repo_list(result)
+        self.repoList.currentItemChanged.connect(self.selection_changed)
+
+    def add_to_repo_list(self, item: str):
+        if len(self.repoList.findItems(item, Qt.MatchFlag.MatchExactly)) == 0:
+            self.repoList.addItem(item)
+
+    def selection_changed(self, new_selection: QListWidgetItem):
+        self.result = new_selection.text()
+
+    def accept(self):
+        if self.result == '':
+            return False
+        else:
+            super().accept()
+
+
 class MainWindow(QMainWindow):
     pullAllButton: QPushButton
     pullRepoButton: QPushButton
@@ -118,6 +163,7 @@ class MainWindow(QMainWindow):
 
     addRepo: QPushButton
     rmRepo: QPushButton
+    cloneRepoButton: QPushButton
 
     repoList: QListWidget
     searchButton: QPushButton
@@ -144,11 +190,20 @@ class MainWindow(QMainWindow):
         self.searchButton.clicked.connect(self.search_for_repos)
         self.rmRepo.clicked.connect(self.rm_repo)
         self.addRepo.clicked.connect(self.manual_repo_add)
+        self.cloneRepoButton.clicked.connect(self.clone_repo)
 
     def search_for_repos(self):
         worker = RepoSearch()
         worker.signals.result.connect(self.add_to_repo_list)
         self.threadpool.start(worker)
+
+    def clone_repo(self):
+        # TODO: show repo window and clone and add repo to repos directory.
+        dialog = RepoSelector()
+        result = dialog.exec()
+        if result:
+            path = clone(dialog.result)
+            self.add_to_repo_list(path)
 
     def add_to_repo_list(self, item: str):
         if len(self.repoList.findItems(item, Qt.MatchFlag.MatchExactly)) == 0:
