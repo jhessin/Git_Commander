@@ -11,16 +11,7 @@ import sys
 from datetime import datetime
 from pickle import dump, load
 
-from PyQt6 import uic
-from PyQt6.QtCore import QObject, pyqtSignal, QRunnable, pyqtSlot, QThreadPool, Qt
-from PyQt6.QtWidgets import (
-    QApplication, QMainWindow,
-    QPushButton, QListWidget,
-    QMenuBar, QStatusBar,
-    QFileDialog,
-    QDialog, QDialogButtonBox,
-    QListWidgetItem,
-)
+from PyQt6 import uic, QtCore, QtWidgets
 
 
 def resource_path(*relative_path: str) -> os.path:
@@ -58,7 +49,7 @@ def load_repos() -> list[str]:
         return []
 
 
-def list_repos(data: QListWidget) -> list[str]:
+def list_repos(data: QtWidgets.QListWidget) -> list[str]:
     """
     Get the list of repos from the provided QListWidget.
     :param data: A QListWidget that holds strings.
@@ -70,7 +61,7 @@ def list_repos(data: QListWidget) -> list[str]:
     return items
 
 
-def save_repos(data: QListWidget):
+def save_repos(data: QtWidgets.QListWidget):
     """
     Save the repos from a QListWidget
     :param data: The QListWidget to get data from
@@ -118,20 +109,20 @@ def pull_repo(path: str):
     subprocess.run(['git', 'pull'], cwd=path, check=True)
 
 
-class RepoSearch(QRunnable):
+class RepoSearch(QtCore.QRunnable):
     """
     Search for repos asynchronously and return them when we are done.
     """
 
-    class Signals(QObject):
+    class Signals(QtCore.QObject):
         """
         Simple signals to send in Qt
         """
-        result = pyqtSignal(str)
+        result = QtCore.pyqtSignal(str)
 
     signals = Signals()
 
-    @pyqtSlot()
+    @QtCore.pyqtSlot()
     def run(self):
         """
         Run the search for repos
@@ -152,13 +143,13 @@ class RepoSearch(QRunnable):
         """
 
 
-class RepoSelector(QDialog):
+class RepoSelector(QtWidgets.QDialog):
     """
     A popup dialog box to help select a repo to clone.
     Uses the GitHub cli to generate a list of repos.
     """
-    buttonBox: QDialogButtonBox
-    repoList: QListWidget
+    buttonBox: QtWidgets.QDialogButtonBox
+    repoList: QtWidgets.QListWidget
 
     def __init__(self):
         super().__init__()
@@ -184,10 +175,10 @@ class RepoSelector(QDialog):
         :param item: The item to add.
         :return: None
         """
-        if len(self.repoList.findItems(item, Qt.MatchFlag.MatchExactly)) == 0:
+        if len(self.repoList.findItems(item, QtCore.Qt.MatchFlag.MatchExactly)) == 0:
             self.repoList.addItem(item)
 
-    def selection_changed(self, new_selection: QListWidgetItem):
+    def selection_changed(self, new_selection: QtWidgets.QListWidgetItem):
         """
         Saves the selected item as the result.
         :param new_selection: The item just selected
@@ -205,36 +196,36 @@ class RepoSelector(QDialog):
         super().accept()
 
 
-class MainWindow(QMainWindow):
+class MainWindow(QtWidgets.QMainWindow):
     """
     The Main Window of the program.
     """
-    pullAllButton: QPushButton
-    pullRepoButton: QPushButton
-    pushAllButton: QPushButton
-    pushRepoButton: QPushButton
+    pullAllButton: QtWidgets.QPushButton
+    pullRepoButton: QtWidgets.QPushButton
+    pushAllButton: QtWidgets.QPushButton
+    pushRepoButton: QtWidgets.QPushButton
 
-    addRepo: QPushButton
-    rmRepo: QPushButton
-    cloneRepoButton: QPushButton
+    addRepo: QtWidgets.QPushButton
+    rmRepo: QtWidgets.QPushButton
+    cloneRepoButton: QtWidgets.QPushButton
 
-    repoList: QListWidget
-    searchButton: QPushButton
+    repoList: QtWidgets.QListWidget
+    searchButton: QtWidgets.QPushButton
 
-    menubar: QMenuBar
-    statusbar: QStatusBar
+    menubar: QtWidgets.QMenuBar
+    statusbar: QtWidgets.QStatusBar
 
     def __init__(self):
         super().__init__()
 
         uic.loadUi(resource_path('ui', 'MainWindow.ui'), self)
 
-        self.repoList.setSelectionMode(QListWidget.SelectionMode.ExtendedSelection)
+        self.repoList.setSelectionMode(QtWidgets.QListWidget.SelectionMode.ExtendedSelection)
         self.repoList.setSortingEnabled(True)
 
         self.repoList.addItems(load_repos())
 
-        self.threadpool = QThreadPool()
+        self.threadpool = QtCore.QThreadPool()
 
         self.pullAllButton.clicked.connect(self.pull_all)
         self.pullRepoButton.clicked.connect(self.pull_selected)
@@ -271,7 +262,7 @@ class MainWindow(QMainWindow):
         :param item: The repo to add.
         :return: None
         """
-        if len(self.repoList.findItems(item, Qt.MatchFlag.MatchExactly)) == 0:
+        if len(self.repoList.findItems(item, QtCore.Qt.MatchFlag.MatchExactly)) == 0:
             self.repoList.addItem(item)
             save_repos(self.repoList)
 
@@ -280,8 +271,8 @@ class MainWindow(QMainWindow):
         Presents a dialog to add a repo manually
         :return: None
         """
-        dialog = QFileDialog(self)
-        dialog.setFileMode(QFileDialog.FileMode.Directory)
+        dialog = QtWidgets.QFileDialog(self)
+        dialog.setFileMode(QtWidgets.QFileDialog.FileMode.Directory)
         if dialog.exec():
             directories = dialog.selectedFiles()
             for directory in directories:
@@ -339,7 +330,7 @@ class MainWindow(QMainWindow):
 
 
 if __name__ == "__main__":
-    app = QApplication(sys.argv)
+    app = QtWidgets.QApplication(sys.argv)
     window = MainWindow()
     window.show()
     # ...
