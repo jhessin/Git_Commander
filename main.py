@@ -94,9 +94,9 @@ def push_repo(path: str):
     """
     print(f"committing and pushing {path}")
     date = datetime.now()
-    subprocess.run(['git', 'add', '.'], cwd=path, check=True)
-    subprocess.run(['git', 'commit', f'-m "{date}"'], cwd=path, check=True)
-    subprocess.run(['git', 'push'], cwd=path, check=True)
+    subprocess.run(['git', 'add', '.'], cwd=path, check=False)
+    subprocess.run(['git', 'commit', f'-m "{date}"'], cwd=path, check=False)
+    subprocess.run(['git', 'push'], cwd=path, check=False)
 
 
 def pull_repo(path: str):
@@ -106,7 +106,7 @@ def pull_repo(path: str):
     :return: None
     """
     print(f"pulling {path}")
-    subprocess.run(['git', 'pull'], cwd=path, check=True)
+    subprocess.run(['git', 'pull'], cwd=path, check=False)
 
 
 class RepoSearch(QtCore.QRunnable):
