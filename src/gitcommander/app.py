@@ -2,6 +2,7 @@
 A basic app for managing multiple git repos and pushing and pulling from github.
 """
 import toga
+from gitcommander.MainWindow import MainWindow
 from toga.style import Pack
 from toga.style.pack import COLUMN, ROW
 
@@ -16,7 +17,7 @@ class GitCommander(toga.App):
         We then create a main window (with a name matching the app), and
         show the main window.
         """
-        main_box = toga.Box()
+        main_box = MainWindow(self)
 
         self.main_window = toga.MainWindow(title=self.formal_name)
         self.main_window.content = main_box
