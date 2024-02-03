@@ -21,23 +21,25 @@ class MainWindow(toga.Box):
     def __init__(self, app: toga.App):
         super().__init__(style=Pack(direction=COLUMN))
 
+        button_width = Pack(width=100)
+
         # First create the overall structure
         top_box = toga.Box(style=Pack(direction=ROW, flex=9))
-        bottom_button_box = toga.Box(style=Pack(direction=ROW, flex=1))
+        bottom_button_box = toga.Box(style=Pack(direction=ROW, height=50))
 
         # top_box items
         self.table = RepoListTable(app, style=Pack(flex=5))
-        right_button_box = toga.Box(style=Pack(direction=COLUMN, flex=5))
+        right_button_box = toga.Box(style=Pack(direction=COLUMN, width=250))
 
         # right_top_box
-        pull_repo_btn = toga.Button('Pull', on_press=self.pull_repo)
-        pull_all_btn = toga.Button('Pull All', on_press=self.pull_all)
+        pull_repo_btn = toga.Button('Pull', on_press=self.pull_repo, style=button_width)
+        pull_all_btn = toga.Button('Pull All', on_press=self.pull_all, style=button_width)
         right_button_box_top = toga.Box(style=Pack(direction=ROW))
         right_button_box_top.add(pull_repo_btn, pull_all_btn)
 
         # right bottom box
-        push_repo_btn = toga.Button('Push', on_press=self.push_repo)
-        push_all_btn = toga.Button('Push All', on_press=self.push_all)
+        push_repo_btn = toga.Button('Push', on_press=self.push_repo, style=button_width)
+        push_all_btn = toga.Button('Push All', on_press=self.push_all, style=button_width)
         right_button_box_bottom = toga.Box(style=Pack(direction=ROW))
         right_button_box_bottom.add(push_repo_btn, push_all_btn)
 
