@@ -23,6 +23,7 @@ test_sources = [
 
 requires = [
     "tinydb",
+    "pydantic"
 ]
 test_requires = [
     "pytest",

@@ -2,9 +2,8 @@
 A basic app for managing multiple git repos and pushing and pulling from GitHub.
 """
 import toga
+
 from gitcommander.MainWindow import MainWindow
-from toga.style import Pack
-from toga.style.pack import COLUMN, ROW
 
 
 class GitCommander(toga.App):
