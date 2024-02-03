@@ -1,5 +1,5 @@
 import os
-from pprint import pprint
+# from pprint import pprint
 
 import toga
 from tinydb import TinyDB
@@ -15,8 +15,8 @@ class RepoListTable(toga.Table):
     """
     repos: RepoList
 
-    def __init__(self, app: toga.App):
-        super().__init__(headings=['Path'], accessors=['path'], multiple_select=True)
+    def __init__(self, app: toga.App, **kwargs):
+        super().__init__(headings=['Path'], accessors=['path'], multiple_select=True, **kwargs)
         os.makedirs(app.paths.data, exist_ok=True)
         db_path = os.path.join(app.paths.data, REPO_FILE_NAME)
         self.repos = RepoList(db=TinyDB(db_path))
@@ -26,7 +26,7 @@ class RepoListTable(toga.Table):
         # self.data = self.repos.db.all()
         self.data = sorted(self.repos.data)
         # pprint(self.repos.data)
-        pprint([data['path'] for data in self.repos.db.all()])
+        # pprint([data['path'] for data in self.repos.db.all()])
 
     def add_row(self, path: str):
         if not self.repos.has(path):
