@@ -9,11 +9,11 @@ import os
 import pickle
 import subprocess
 import sys
-from actions import load_repos, clone, push_repo, pull_repo, PICKLE_FILE, REPOS_DIRECTORY
-from datetime import datetime
-from pickle import dump, load
+from pickle import dump
 
 from PyQt6 import uic, QtCore, QtWidgets
+
+from actions import load_repos, clone, push_repo, pull_repo, PICKLE_FILE
 
 
 def resource_path(*relative_path: str) -> os.path:
