@@ -3,5 +3,5 @@
   <component name="Black">
     <option name="sdkName" value="Pipenv (Git_Commander)" />
   </component>
-  <component name="ProjectRootManager" version="2" project-jdk-name="Python 3.11 (Git_Commander_old)" project-jdk-type="Python SDK" />
+  <component name="ProjectRootManager" version="2" project-jdk-name="Python 3.10 (Git_Commander_OLD)" project-jdk-type="Python SDK" />
 </project>
