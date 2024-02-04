@@ -1,9 +1,8 @@
 """
 A basic wrapper for a DetailList view.
 """
-import os
 
-from pydantic import BaseModel, ConfigDict, PositiveInt
+from pydantic import BaseModel, ConfigDict
 from tinydb import TinyDB, Query
 
 
