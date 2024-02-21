@@ -8,6 +8,8 @@ from toga.widgets.button import OnPressHandler
 from gitcommander.actions import push_repo, pull_repo
 from gitcommander.views.repo_list_table import RepoListTable
 
+WAIT_OBJECT = '...'
+
 
 class MainWindow(toga.Box):
     search_for_repos: OnPressHandler
@@ -65,7 +67,6 @@ class MainWindow(toga.Box):
                 repo_list.append(root)
                 self.table.add_row(path=root)
         self.table.update_data()
-        print('Finished searching for repos')
 
     async def rm_repo(self, btn: toga.Button):
         if not self.table.selection:
@@ -77,18 +78,34 @@ class MainWindow(toga.Box):
         if not self.table.selection:
             return
         for row in self.table.selection:
-            await push_repo(row.path)
+            path = row.path
+            i = self.table.data.index(row)
+            self.table.data[i] = WAIT_OBJECT
+            await push_repo(path)
+            self.table.data[i] = path
 
     async def push_all(self, btn: toga.Button):
         for row in self.table.data:
-            await push_repo(row.path)
+            path = row.path
+            i = self.table.data.index(row)
+            self.table.data[i] = WAIT_OBJECT
+            await push_repo(path)
+            self.table.data[i] = path
 
     async def pull_repo(self, btn: toga.Button):
         if not self.table.selection:
             return
         for row in self.table.selection:
-            await pull_repo(row.path)
+            path = row.path
+            i = self.table.data.index(row)
+            self.table.data[i] = WAIT_OBJECT
+            await pull_repo(path)
+            self.table.data[i] = path
 
     async def pull_all(self, btn: toga.Button):
         for row in self.table.data:
-            await pull_repo(row.path)
+            path = row.path
+            i = self.table.data.index(row)
+            self.table.data[i] = WAIT_OBJECT
+            await pull_repo(path)
+            self.table.data[i] = path
