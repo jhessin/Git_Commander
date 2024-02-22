@@ -1,4 +1,5 @@
 import os.path
+import asyncio
 
 import toga
 from toga.style import Pack
@@ -57,7 +58,9 @@ class MainWindow(toga.Box):
 
         bottom_button_box.add(add_button, rm_button)
 
-        self.add(top_box, bottom_button_box)
+        self.statusLabel = toga.Label('Ready.')
+
+        self.add(top_box, bottom_button_box, self.statusLabel)
 
     async def search_for_repos(self, btn: toga.Button):
         home = os.path.expanduser('~')
@@ -77,35 +80,35 @@ class MainWindow(toga.Box):
     async def push_repo(self, btn: toga.Button):
         if not self.table.selection:
             return
+        self.statusLabel.text = 'Working...'
         for row in self.table.selection:
-            path = row.path
-            i = self.table.data.index(row)
-            self.table.data[i] = WAIT_OBJECT
-            await push_repo(path)
-            self.table.data[i] = path
+            await asyncio.sleep(1)
+            await push_repo(row.path)
+            await asyncio.sleep(1)
+        self.statusLabel.text = 'Ready.'
 
     async def push_all(self, btn: toga.Button):
+        self.statusLabel.text = 'Working...'
         for row in self.table.data:
-            path = row.path
-            i = self.table.data.index(row)
-            self.table.data[i] = WAIT_OBJECT
-            await push_repo(path)
-            self.table.data[i] = path
+            await asyncio.sleep(1)
+            await push_repo(row.path)
+            await asyncio.sleep(1)
+        self.statusLabel.text = 'Ready.'
 
     async def pull_repo(self, btn: toga.Button):
         if not self.table.selection:
             return
+        self.statusLabel.text = 'Working...'
         for row in self.table.selection:
-            path = row.path
-            i = self.table.data.index(row)
-            self.table.data[i] = WAIT_OBJECT
-            await pull_repo(path)
-            self.table.data[i] = path
+            await asyncio.sleep(1)
+            await pull_repo(row.path)
+            await asyncio.sleep(1)
+        self.statusLabel.text = 'Ready.'
 
     async def pull_all(self, btn: toga.Button):
+        self.statusLabel.text = 'Working...'
         for row in self.table.data:
-            path = row.path
-            i = self.table.data.index(row)
-            self.table.data[i] = WAIT_OBJECT
-            await pull_repo(path)
-            self.table.data[i] = path
+            await asyncio.sleep(1)
+            await pull_repo(row.path)
+            await asyncio.sleep(1)
+        self.statusLabel.text = 'Ready.'
