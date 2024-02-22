@@ -82,16 +82,24 @@ class MainWindow(toga.Box):
             return
         self.statusLabel.text = 'Working...'
         for row in self.table.selection:
+            path = row.path
+            i = self.table.data.index(row)
+            self.table.data[i] = '...'
             await asyncio.sleep(1)
-            await push_repo(row.path)
+            await push_repo(path)
+            self.table.data[i] = path
             await asyncio.sleep(1)
         self.statusLabel.text = 'Ready.'
 
     async def push_all(self, btn: toga.Button):
         self.statusLabel.text = 'Working...'
         for row in self.table.data:
+            path = row.path
+            i = self.table.data.index(row)
+            self.table.data[i] = '...'
             await asyncio.sleep(1)
-            await push_repo(row.path)
+            await push_repo(path)
+            self.table.data[i] = path
             await asyncio.sleep(1)
         self.statusLabel.text = 'Ready.'
 
@@ -100,15 +108,23 @@ class MainWindow(toga.Box):
             return
         self.statusLabel.text = 'Working...'
         for row in self.table.selection:
+            path = row.path
+            i = self.table.data.index(row)
+            self.table.data[i] = '...'
             await asyncio.sleep(1)
-            await pull_repo(row.path)
+            await pull_repo(path)
+            self.table.data[i] = path
             await asyncio.sleep(1)
         self.statusLabel.text = 'Ready.'
 
     async def pull_all(self, btn: toga.Button):
         self.statusLabel.text = 'Working...'
         for row in self.table.data:
+            path = row.path
+            i = self.table.data.index(row)
+            self.table.data[i] = '...'
             await asyncio.sleep(1)
-            await pull_repo(row.path)
+            await pull_repo(path)
+            self.table.data[i] = path
             await asyncio.sleep(1)
         self.statusLabel.text = 'Ready.'
