@@ -10,3 +10,7 @@ A manager for multiple git repositories across different computers.
 .. _`Briefcase`: https://briefcase.readthedocs.io/
 .. _`The BeeWare Project`: https://beeware.org/
 .. _`becoming a financial member of BeeWare`: https://beeware.org/contributing/membership
+
+
+I am currently working through the tutorial found here:
+https://wiki.wxpython.org/Getting%20Started
