@@ -1,0 +1,31 @@
+# This project was generated with 0.3.20 using template: https://github.com/beeware/briefcase-template@v0.3.20
+[tool.briefcase]
+project_name = "Git Commander"
+bundle = "com.grillbrickstudios"
+version = "0.0.1"
+url = "https://grillbrickstudios.com/gitcommander"
+license.file = "LICENSE"
+author = "Jim Hessin"
+author_email = "jhessin@gmail.com"
+
+[tool.briefcase.app.gitcommander]
+formal_name = "Git Commander"
+description = "A manager for multiple git repositories across different computers."
+long_description = """
+Git Commander is a simple UI that can be used to pull and push multiple git
+repos for you so you can just focus on working. This software is provided as is
+and will add all files to your repos with a simple timestamp commit. Use with
+caution as this can push things to github that you didn't intend to push.
+"""
+sources = [
+    "src/gitcommander",
+]
+requires = [
+    "wxpython",
+    "tinydb",
+    "fsspec",
+]
+test_sources = [
+    "tests",
+]
+

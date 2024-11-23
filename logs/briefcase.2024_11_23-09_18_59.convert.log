@@ -1,0 +1,162 @@
+Date/Time:       2024-11-23 09:18:59 
+Command line:    C:\Users\jhess\scoop\apps\python\current\Scripts\briefcase convert
+
+OS Release:      Windows 11
+OS Version:      10.0.22631
+Architecture:    AMD64
+Platform:        Windows-11-10.0.22631-SP0
+
+Python exe:      C:\Users\jhess\scoop\apps\python\current\python.exe
+Python version:  3.12.7 (tags/v3.12.7:0b05ead, Oct  1 2024, 03:06:41) [MSC v.1941 64 bit (AMD64)]
+Virtual env:     False
+Conda env:       False
+
+Briefcase:       0.3.20
+Target platform: all
+Target format:   None
+
+Environment Variables:
+	ALLUSERSPROFILE=C:\ProgramData
+	APPDATA=C:\Users\jhess\AppData\Roaming
+	ASL.LOG=Destination=file
+	BINRC=C:/Users/jhess/.local/bin
+	CHOCOLATEYINSTALL=C:\ProgramData\chocolatey
+	CHOCOLATEYLASTPATHUPDATE=133578837321114957
+	COMMONPROGRAMFILES=C:\Program Files\Common Files
+	COMMONPROGRAMFILES(X86)=C:\Program Files (x86)\Common Files
+	COMMONPROGRAMW6432=C:\Program Files\Common Files
+	COMPUTERNAME=RAINBOW
+	COMSPEC=C:\WINDOWS\system32\cmd.exe
+	CONDA_PROMPT_MODIFIER=false
+	CONFIGRC=C:/Users/jhess/.config
+	CPLUS_INCLUDE_PATH=C:\Users\jhess\scoop\apps\gcc\current\include
+	C_INCLUDE_PATH=C:\Users\jhess\scoop\apps\gcc\current\include
+	DRIVERDATA=C:\Windows\System32\Drivers\DriverData
+	EDITOR=C:/Users/jhess/scoop/shims/nvim
+	EXEPATH=C:\Users\jhess\scoop\apps\git\2.46.2\bin
+	GITHUB=C:/Users/jhess/Projects
+	GIT_INSTALL_ROOT=C:\Users\jhess\scoop\apps\git\current
+	HISTCONTROL=ignoreboth:erasedups
+	HOME=C:\Users\jhess
+	HOMEDRIVE=C:
+	HOMEPATH=\Users\jhess
+	LOCALAPPDATA=C:\Users\jhess\AppData\Local
+	LOGONSERVER=\\RAINBOW
+	LS_COLORS=rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:
+	MSYSTEM=MINGW64
+	NUMBER_OF_PROCESSORS=24
+	NVM_HOME=C:\Users\jhess\scoop\apps\nvm\current
+	NVM_SYMLINK=C:\Users\jhess\scoop\persist\nvm\nodejs\nodejs
+	OLDPWD=C:/Users/jhess/repos
+	ONEDRIVE=C:\Users\jhess\OneDrive
+	ONEDRIVECONSUMER=C:\Users\jhess\OneDrive
+	OPENSSL_IA32CAP=~0x20000000
+	OS=Windows_NT
+	OSTYPE=msys
+	PAGER=nvim -RM
+	PATH=C:\Users\jhess\scoop\apps\git\2.46.2\mingw64\bin;C:\Users\jhess\scoop\apps\git\2.46.2\usr\bin;C:\Users\jhess\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\FirefoxPWA\;C:\ProgramData\chocolatey\bin;C:\Program Files (x86)\ZeroTier\One\;C:\Program Files\Git\cmd;C:\Program Files\dotnet\;C:\Program Files\NVIDIA Corporation\NVIDIA app\NvDLISR;C:\Users\jhess\scoop\apps\vscodium\current\bin;C:\Users\jhess\scoop\apps\python\current\Scripts;C:\Users\jhess\scoop\apps\python\current;C:\Users\jhess\scoop\apps\nvm\current;C:\Users\jhess\scoop\apps\nvm\current\nodejs\nodejs;C:\Users\jhess\AppData\Local\Programs\Python\Launcher\;C:\Users\jhess\scoop\apps\gcc\current\bin;C:\Users\jhess\scoop\shims;C:\Users\jhess\AppData\Local\Microsoft\WindowsApps;C:\Users\jhess\AppData\Local\Microsoft\WindowsApps;C:\Program Files\JetBrains\PyCharm 2024.1.1\bin;C:\Users\jhess\AppData\Local\JetBrains\Toolbox\scripts;C:\Users\jhess\.dotnet\tools
+	PATHEXT=.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC
+	PLINK_PROTOCOL=ssh
+	POSH_SESSION_ID=b2af5001-7652-441f-8717-bd739fcd0923
+	POSH_SHELL_VERSION=5.2.37(1)-release
+	POSH_THEME=C:\Users\jhess\AppData\Local\oh-my-posh\config.2d317612584924d81d33eaaf87ae1579ef713e9f2899dc297393d1dedbae3ead.omp.json
+	POSH_THEMES_PATH=C:\Users\jhess\scoop\apps\oh-my-posh\current\themes
+	POWERLINE_COMMAND=oh-my-posh
+	PROCESSOR_ARCHITECTURE=AMD64
+	PROCESSOR_IDENTIFIER=Intel64 Family 6 Model 183 Stepping 1, GenuineIntel
+	PROCESSOR_LEVEL=6
+	PROCESSOR_REVISION=b701
+	PROGRAMDATA=C:\ProgramData
+	PROGRAMFILES=C:\Program Files
+	PROGRAMFILES(X86)=C:\Program Files (x86)
+	PROGRAMW6432=C:\Program Files
+	PS1=$(_omp_get_primary)
+	PSMODULEPATH=C:\Program Files\WindowsPowerShell\Modules;C:\WINDOWS\system32\WindowsPowerShell\v1.0\Modules
+	PUBLIC=C:\Users\Public
+	PWD=C:/Users/jhess/repos/Git_Commander
+	PYCHARM=C:\Program Files\JetBrains\PyCharm 2024.1.1\bin;
+	SESSIONNAME=Console
+	SHLVL=1
+	SYSTEMDRIVE=C:
+	SYSTEMROOT=C:\WINDOWS
+	TEMP=C:\Users\jhess\AppData\Local\Temp
+	TERM=xterm-256color
+	TMP=C:\Users\jhess\AppData\Local\Temp
+	USERDOMAIN=RAINBOW
+	USERDOMAIN_ROAMINGPROFILE=RAINBOW
+	USERNAME=jhess
+	USERPROFILE=C:\Users\jhess
+	VBOX_MSI_INSTALL_PATH=C:\Program Files\Oracle\VirtualBox\
+	VIMRC=C:/Users/jhess/.config/nvim
+	WINDIR=C:\WINDOWS
+	WSLENV=WT_SESSION:WT_PROFILE_ID:
+	WT_PROFILE_ID={99b3067e-cde9-4a98-a07b-63013e770afe}
+	WT_SESSION=b5c51cf5-3157-45d8-abe0-0aaf646e3da7
+	_=C:/Users/jhess/scoop/persist/python/Scripts/briefcase
+
+pyproject.toml:
+[Errno 2] No such file or directory: 'C:\\Users\\jhess\\repos\\Git_Commander\\pyproject.toml'
+
+Briefcase Log:
+[09:18:59]                                                                                                                                                            __main__.py:44
+           Cannot automatically set up Briefcase for a project without a 'pyproject.toml' file.                                                                       __main__.py:45
+           Saving log... started                                                                                                                                      console.py:391
+
+Main thread traceback:
+╭─────────────────────────────────────────────────────────────────────── Traceback (most recent call last) ────────────────────────────────────────────────────────────────────────╮
+│ C:\Users\jhess\scoop\apps\python\current\Lib\site-packages\briefcase\__main__.py:29 in main                                                                                      │
+│                                                                                                                                                                                  │
+│   26 │   │   │   Path.cwd() / "pyproject.toml",                                                                                                                                  │
+│   27 │   │   │   overrides=overrides,                                                                                                                                            │
+│   28 │   │   )                                                                                                                                                                   │
+│ ❱ 29 │   │   command(**options)                                                                                                                                                  │
+│   30 │   except HelpText as e:                                                                                                                                                   │
+│   31 │   │   logger.info()                                                                                                                                                       │
+│   32 │   │   logger.info(str(e))                                                                                                                                                 │
+│                                                                                                                                                                                  │
+│ ╭─────────────────────────────────────────────────────────── locals ────────────────────────────────────────────────────────────╮                                                │
+│ │       command = <briefcase.commands.convert.ConvertCommand object at 0x0000012EB5FE5EE0>                                      │                                                │
+│ │       Command = <class 'briefcase.commands.convert.ConvertCommand'>                                                           │                                                │
+│ │       console = <briefcase.console.Console object at 0x0000012EB6219D00>                                                      │                                                │
+│ │             e = BriefcaseCommandError("Cannot automatically set up Briefcase for a project without a 'pyproject.toml' file.") │                                                │
+│ │ extra_cmdline = []                                                                                                            │                                                │
+│ │        logger = <briefcase.console.Log object at 0x0000012EB60D2630>                                                          │                                                │
+│ │       options = {'template': None, 'template_branch': None, 'project_overrides': None}                                        │                                                │
+│ │     overrides = {}                                                                                                            │                                                │
+│ │       printer = <briefcase.console.Printer object at 0x0000012EB3156F60>                                                      │                                                │
+│ │        result = 200                                                                                                           │                                                │
+│ ╰───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯                                                │
+│                                                                                                                                                                                  │
+│ C:\Users\jhess\scoop\apps\python\current\Lib\site-packages\briefcase\commands\convert.py:764 in __call__                                                                         │
+│                                                                                                                                                                                  │
+│   761 │   │   # There are no apps, so finalize() will be a no op on app configurations.                                                                                          │
+│   762 │   │   self.finalize()                                                                                                                                                    │
+│   763 │   │                                                                                                                                                                      │
+│ ❱ 764 │   │   self.validate_pyproject_file()                                                                                                                                     │
+│   765 │   │                                                                                                                                                                      │
+│   766 │   │   # Setup the app for briefcase                                                                                                                                      │
+│   767 │   │   with TemporaryDirectory() as tmp_path:                                                                                                                             │
+│                                                                                                                                                                                  │
+│ ╭─────────────────────────────────────────── locals ───────────────────────────────────────────╮                                                                                 │
+│ │           options = {}                                                                       │                                                                                 │
+│ │ project_overrides = None                                                                     │                                                                                 │
+│ │              self = <briefcase.commands.convert.ConvertCommand object at 0x0000012EB5FE5EE0> │                                                                                 │
+│ │          template = None                                                                     │                                                                                 │
+│ │   template_branch = None                                                                     │                                                                                 │
+│ ╰──────────────────────────────────────────────────────────────────────────────────────────────╯                                                                                 │
+│                                                                                                                                                                                  │
+│ C:\Users\jhess\scoop\apps\python\current\Lib\site-packages\briefcase\commands\convert.py:740 in validate_pyproject_file                                                          │
+│                                                                                                                                                                                  │
+│   737 │   def validate_pyproject_file(self) -> None:                                                                                                                             │
+│   738 │   │   """Cannot setup new app if it already has briefcase settings in pyproject."""                                                                                      │
+│   739 │   │   if not (self.base_path / "pyproject.toml").exists():                                                                                                               │
+│ ❱ 740 │   │   │   raise BriefcaseCommandError(                                                                                                                                   │
+│   741 │   │   │   │   "Cannot automatically set up Briefcase for a project without a "                                                                                           │
+│   742 │   │   │   │   "'pyproject.toml' file."                                                                                                                                   │
+│   743 │   │   │   )                                                                                                                                                              │
+│                                                                                                                                                                                  │
+│ ╭──────────────────────────────────── locals ─────────────────────────────────────╮                                                                                              │
+│ │ self = <briefcase.commands.convert.ConvertCommand object at 0x0000012EB5FE5EE0> │                                                                                              │
+│ ╰─────────────────────────────────────────────────────────────────────────────────╯                                                                                              │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+BriefcaseCommandError: Cannot automatically set up Briefcase for a project without a 'pyproject.toml' file.
