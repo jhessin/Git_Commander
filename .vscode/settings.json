@@ -4,7 +4,7 @@
     ".venv": true,
   },
   "pylint.path": [
-    "~/.venv/Scripts/python",
+    ".venv/Scripts/python",
     "-m",
     "pylint"
   ]
