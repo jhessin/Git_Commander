@@ -3,11 +3,14 @@ A manager for multiple git repositories across different computers.
 """
 
 import wx
-from gitcommander.Main_Window import Main_Window
+from gitcommander.ExampleFrame import ExampleFrame as Frame
+
 
 def main():
-    """ The Main application logic """
+    """The Main application logic"""
     app = wx.App(True)
-    Main_Window(None, "Small editor")
+    Frame(None)
     app.MainLoop()
+
+
 # end main
