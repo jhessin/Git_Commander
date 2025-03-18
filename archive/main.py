@@ -13,7 +13,7 @@ from pickle import dump
 
 from PyQt6 import uic, QtCore, QtWidgets
 
-from actions import load_repos, clone, push_repo, pull_repo, PICKLE_FILE
+from gitcommander.actions import load_repos, clone, push_repo, pull_repo, PICKLE_FILE
 
 
 def resource_path(*relative_path: str) -> os.path:
