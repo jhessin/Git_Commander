@@ -3,7 +3,7 @@ A manager for multiple git repositories across different computers.
 """
 
 import wx
-from gitcommander.Main_Window import Main_Window
+from Main_Window import Main_Window
 
 
 def main():
