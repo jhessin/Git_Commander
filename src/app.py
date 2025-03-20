@@ -10,3 +10,7 @@ def main():
     app = wx.App(True)
     frame = Main_Window(None, "Small editor")
     app.MainLoop()
+
+
+def test():
+    print('Test successful!')

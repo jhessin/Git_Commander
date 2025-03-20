@@ -1,0 +1,16 @@
+LICENSE
+README.md
+pyproject.toml
+src/Main_Window.py
+src/Text_editor.py
+src/__init__.py
+src/__main__.py
+src/actions.py
+src/app.py
+src/frames/__init__.py
+src/git_commander.egg-info/PKG-INFO
+src/git_commander.egg-info/SOURCES.txt
+src/git_commander.egg-info/dependency_links.txt
+src/git_commander.egg-info/entry_points.txt
+src/git_commander.egg-info/requires.txt
+src/git_commander.egg-info/top_level.txt
