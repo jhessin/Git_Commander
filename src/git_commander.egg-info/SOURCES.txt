@@ -1,12 +1,14 @@
 LICENSE
 README.md
 pyproject.toml
-src/Main_Window.py
-src/Text_editor.py
+setup.py
 src/__init__.py
 src/__main__.py
 src/actions.py
 src/app.py
+src/Frames/Main.py
+src/Frames/Text_editor.py
+src/Frames/__init__.py
 src/frames/__init__.py
 src/git_commander.egg-info/PKG-INFO
 src/git_commander.egg-info/SOURCES.txt

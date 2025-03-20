@@ -2,8 +2,7 @@ import os
 import wx
 
 
-class Main_Window(wx.Frame):
-
+class Main(wx.Frame):
     control: wx.TextCtrl
 
     def __init__(self, parent, title, *args, **kw):

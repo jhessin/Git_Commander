@@ -3,12 +3,12 @@ A manager for multiple git repositories across different computers.
 """
 
 import wx
-from Main_Window import Main_Window
+from Frames import Main
 
 
 def main():
     app = wx.App(True)
-    frame = Main_Window(None, "Small editor")
+    frame = Main(None, "Small editor")
     app.MainLoop()
 
 

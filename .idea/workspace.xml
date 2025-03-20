@@ -5,18 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a82acc0c-f7e3-49c7-b581-69f176b5dbcb" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/LICENSE" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pyproject.toml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/frames/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/git_commander.egg-info/PKG-INFO" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/git_commander.egg-info/SOURCES.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/git_commander.egg-info/dependency_links.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/git_commander.egg-info/entry_points.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/git_commander.egg-info/requires.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/git_commander.egg-info/top_level.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Frames/__init__.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pyproject.toml" beforeDir="false" afterPath="$PROJECT_DIR$/pyproject.toml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main_Window.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/Frames/Main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Text_editor.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/Frames/Text_editor.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/app.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/frames/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/setup.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/git_commander.egg-info/SOURCES.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/git_commander.egg-info/SOURCES.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/git_commander.egg-info/top_level.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/git_commander.egg-info/top_level.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -56,6 +53,7 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\jhess\repos\Git_Commander\src\frames" />
       <recent name="C:\Users\jhess\repos\Git_Commander\src" />
       <recent name="C:\Users\jhess\repos\Git_Commander\src\gitcommander" />
       <recent name="C:\Users\jhess\repos\Git_Commander" />
@@ -76,7 +74,7 @@
       <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/gitcommander" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/src" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />

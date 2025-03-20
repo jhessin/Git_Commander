@@ -1,7 +1,5 @@
-Main_Window
-Text_editor
+Frames
 __init__
 __main__
 actions
 app
-frames
