@@ -1,5 +1,0 @@
-[console_scripts]
-test = app:test
-
-[gui_scripts]
-gitcommander = app:main
