@@ -2,5 +2,4 @@ build==1.2.2.post1
 colorama==0.4.6
 packaging==24.2
 pyproject_hooks==1.2.0
-six==1.17.0
 wxPython==4.2.2

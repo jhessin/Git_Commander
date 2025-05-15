@@ -9,8 +9,5 @@ class Repo(object):
     _url: str
 
 
-class RepoList(object):
-    _data: list[Repo] = []
-
-    def __add__(self, other: list[Repo]) -> list[Repo]:
-        return self._data + other
+class RepoList(list[Repo]):
+    pass
