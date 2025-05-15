@@ -5,18 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a82acc0c-f7e3-49c7-b581-69f176b5dbcb" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/Frames/Panels/Models/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Frames/Panels/Models/repo_list.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Frames/Panels/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Frames/Panels/repo_list.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/git_commander.egg-info/PKG-INFO" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/git_commander.egg-info/SOURCES.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/git_commander.egg-info/dependency_links.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/git_commander.egg-info/entry_points.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/git_commander.egg-info/requires.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/git_commander.egg-info/top_level.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/archive/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/archive/RepoSearch.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/actions.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/actions.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

@@ -11,8 +11,6 @@ import subprocess
 import sys
 from pickle import dump
 
-from PyQt6 import uic, QtCore, QtWidgets
-
 from actions import load_repos, clone, push_repo, pull_repo, PICKLE_FILE
 
 

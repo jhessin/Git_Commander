@@ -26,7 +26,7 @@ REPOS_DIRECTORY = os.path.join(os.path.expanduser("~"), "repos")
 def load_repos() -> list[str]:
     """
     Load the repos from the pickle file.
-    :return: a list of directories that hold repos.
+    :return: a list of directories (str) that hold repos.
     """
     if os.path.exists(PICKLE_FILE):
         with open(PICKLE_FILE, "rb") as file:
