@@ -19,8 +19,8 @@ class Main(wx.Frame):
         self.CreateStatusBar()  # A Statusbar in the bottom of the window
 
         # Setting up the list views
-        self.left_list = RepoListView(self)
-        self.right_list = RepoListView(self)
+        self.left_list = RepoListView(self, 'All Repos')
+        self.right_list = RepoListView(self, 'Selected Repos')
 
         # Setting up the menu.
         # file_menu = wx.Menu()
@@ -34,7 +34,7 @@ class Main(wx.Frame):
 
         # Creating the menubar
         # menu_bar = wx.MenuBar()
-        # menu_bar.Append(file_menu, "&File")  # Adding the filemenu to the menubar
+        # menu_bar.Append(file_menu, "&File")  # Adding the file_menu to the menubar
         # self.SetMenuBar(menu_bar)  # Adding the MenuBar to the Frame content.
 
         # Set events
@@ -63,7 +63,7 @@ class Main(wx.Frame):
         # Show the window
         self.Show(True)
 
-    def on_open(self, e: wx.Event):
+    def on_open(self, _e: wx.Event):
         """Open a file"""
         self.dir_name = ""
         dlg = wx.FileDialog(self, "Choose a file", self.dir_name, "", "*.*", wx.FD_OPEN)
@@ -71,11 +71,11 @@ class Main(wx.Frame):
             self.filename = dlg.GetFilename()
             self.dir_name = dlg.GetDirectory()
             f = open(os.path.join(self.dir_name, self.filename), "r")
-            self.control.SetValue(f.read())
+            # self.control.SetValue(f.read())
             f.close()
         dlg.Destroy()
 
-    def on_about(self, event: wx.Event):
+    def on_about(self, _event: wx.Event):
         # A message dialog box with an OK button. wx.OK is a standard ID in wxWidgets
         dlg = wx.MessageDialog(
             self, "A small text editor", "About Sample Editor", wx.OK
@@ -83,5 +83,5 @@ class Main(wx.Frame):
         dlg.ShowModal()  # Show it
         dlg.Destroy()  # finally destroy it when finished
 
-    def on_exit(self, event: wx.Event):
+    def on_exit(self, _event: wx.Event):
         self.Close(True)
