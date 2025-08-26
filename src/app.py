@@ -8,7 +8,7 @@ from Frames import Main
 
 def main():
     app = wx.App(True)
-    frame = Main(None, "Small editor")
+    frame = Main(None, "Git Commander")
     app.MainLoop()
 
 
