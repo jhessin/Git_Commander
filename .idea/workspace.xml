@@ -5,8 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a82acc0c-f7e3-49c7-b581-69f176b5dbcb" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Frames/Main.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/Frames/Main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Frames/Panels/Models/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/Models/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Frames/Panels/Models/repo_list.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/Models/repo_list.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Frames/Panels/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/Panels/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Frames/Panels/repo_list_view.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/Panels/repo_list_view.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,9 +57,9 @@
 }</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\jhess\repos\Git_Commander\src" />
       <recent name="C:\Users\jhess\repos\Git_Commander\src\Frames" />
       <recent name="C:\Users\jhess\repos\Git_Commander\src\frames" />
-      <recent name="C:\Users\jhess\repos\Git_Commander\src" />
       <recent name="C:\Users\jhess\repos\Git_Commander\src\gitcommander" />
       <recent name="C:\Users\jhess\repos\Git_Commander" />
     </key>
