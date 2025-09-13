@@ -1,5 +1,6 @@
-from app import main
+from app import GitCommander
 
 
 if __name__ == "__main__":
-    main()
+    app = GitCommander(0)
+    app.MainLoop()

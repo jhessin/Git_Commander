@@ -5,7 +5,25 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a82acc0c-f7e3-49c7-b581-69f176b5dbcb" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/MyFrame.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app.py.bak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ui.wxg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ui.wxg.bak" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/Git_Commander.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Git_Commander.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Frames/Main.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Frames/Text_editor.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Frames/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Models/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/console_output.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Models/repo_list.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Panels/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Panels/repo_list_view.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/__main__.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/__main__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/app.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui.wxg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui.wxg.bak" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/wxglade_out.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/wxglade_out.py.bak" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,27 +63,27 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "Python.Git_Commander.executor": "Run",
-    "Python.__main__.executor": "Run",
-    "Python.app.executor": "Run",
-    "Python.briefcase.executor": "Run",
-    "Python.wxglade_out.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "deletionFromPopupRequiresConfirmation": "false",
-    "git-widget-placeholder": "master",
-    "ignore.virus.scanning.warn.message": "true",
-    "junie.onboarding.icon.badge.shown": "true",
-    "last_opened_file_path": "C:/Users/jhess/repos/Git_Commander/src/__main__.py",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
-    "to.speed.mode.migration.done": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;Python.Git_Commander.executor&quot;: &quot;Run&quot;,
+    &quot;Python.__main__.executor&quot;: &quot;Run&quot;,
+    &quot;Python.app.executor&quot;: &quot;Run&quot;,
+    &quot;Python.briefcase.executor&quot;: &quot;Run&quot;,
+    &quot;Python.wxglade_out.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;deletionFromPopupRequiresConfirmation&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/jhess/repos/Git_Commander/src/__main__.py&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;to.speed.mode.migration.done&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\jhess\repos\Git_Commander\src" />
@@ -108,7 +126,7 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-python-sdk-7e47963ff851-f0eec537fc84-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-252.23892.515" />
+        <option value="bundled-python-sdk-babbdf50b680-746f403e7f0c-com.jetbrains.pycharm.community.sharedIndexes.bundled-PC-241.15989.155" />
       </set>
     </attachedChunks>
   </component>
