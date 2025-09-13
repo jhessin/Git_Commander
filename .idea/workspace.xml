@@ -5,25 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a82acc0c-f7e3-49c7-b581-69f176b5dbcb" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/MyFrame.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app.py.bak" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ui.wxg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ui.wxg.bak" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/Git_Commander.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Git_Commander.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/MyFrame.py.bak" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Frames/Main.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Frames/Text_editor.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Frames/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Models/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/console_output.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Models/repo_list.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Panels/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Panels/repo_list_view.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/__main__.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/__main__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/MyFrame.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/MyFrame.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/app.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui.wxg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui.wxg.bak" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/wxglade_out.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/wxglade_out.py.bak" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app.py.bak" beforeDir="false" afterPath="$PROJECT_DIR$/src/app.py.bak" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui.wxg" beforeDir="false" afterPath="$PROJECT_DIR$/ui.wxg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui.wxg.bak" beforeDir="false" afterPath="$PROJECT_DIR$/ui.wxg.bak" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -126,7 +114,7 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-python-sdk-babbdf50b680-746f403e7f0c-com.jetbrains.pycharm.community.sharedIndexes.bundled-PC-241.15989.155" />
+        <option value="bundled-python-sdk-7e47963ff851-f0eec537fc84-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-252.23892.515" />
       </set>
     </attachedChunks>
   </component>

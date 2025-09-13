@@ -38,7 +38,8 @@ class MyFrame(wx.Frame):
 
         self.list_all_repos = wx.ListCtrl(self.all_repos, wx.ID_ANY, style=wx.LC_HRULES | wx.LC_REPORT | wx.LC_VRULES)
         self.list_all_repos.SetToolTip("These are all the repos you have found on your system.")
-        self.list_all_repos.AppendColumn("Repo Location", format=wx.LIST_FORMAT_LEFT, width=-1)
+        self.list_all_repos.AppendColumn("Repo Location", format=wx.LIST_FORMAT_LEFT,
+                                         width=self.list_all_repos.GetSize().GetWidth())
         sizer_2.Add(self.list_all_repos, 90, wx.EXPAND, 0)
 
         btns_repo_selection = wx.BoxSizer(wx.VERTICAL)
@@ -78,7 +79,8 @@ class MyFrame(wx.Frame):
         self.list_working_repos = wx.ListCtrl(self.working_repos, wx.ID_ANY,
                                               style=wx.LC_HRULES | wx.LC_REPORT | wx.LC_VRULES)
         self.list_working_repos.SetToolTip("These are the repos you are currently working with.")
-        self.list_working_repos.AppendColumn("Repo Location", format=wx.LIST_FORMAT_LEFT, width=-1)
+        self.list_working_repos.AppendColumn("Repo Location", format=wx.LIST_FORMAT_LEFT,
+                                             width=self.list_working_repos.GetSize().GetWidth())
         sizer_3.Add(self.list_working_repos, 90, wx.EXPAND, 0)
 
         grid_sizer_3 = wx.FlexGridSizer(3, 3, 0, 0)
@@ -132,6 +134,8 @@ class MyFrame(wx.Frame):
 
         self.Layout()
 
+        self.list_all_repos.Bind(wx.EVT_SIZE, self.on_resize)
+        self.list_working_repos.Bind(wx.EVT_SIZE, self.on_resize)
         self.button_11.Bind(wx.EVT_BUTTON, self.scan_for_repos)
         self.button_12.Bind(wx.EVT_BUTTON, self.remove_invalid_repos_from_all)
         self.button_13.Bind(wx.EVT_BUTTON, self.add_new_repo_to_all)
@@ -196,4 +200,12 @@ class MyFrame(wx.Frame):
         print("Event handler 'push_all_repos' not implemented!")
         event.Skip()
 
+    def on_resize(self, event):  # wxGlade: MyFrame.<event_handler>
+        # Get current width of the ListCtrl
+        all_width = self.list_all_repos.GetSize().GetWidth()
+        working_width = self.list_working_repos.GetSize().GetWidth()
+        # Set column width to full width (minus borders / scrollbar space if needed
+        self.list_all_repos.SetColumnWidth(0, all_width)
+        self.list_working_repos.SetColumnWidth(1, working_width)
+        event.Skip()
 # end of class MyFrame
