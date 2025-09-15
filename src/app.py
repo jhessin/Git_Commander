@@ -8,10 +8,12 @@
 # Manual changes will be overwritten without warning!
 
 import wx
+from wxasync import WxAsyncApp
+import asyncio
 from MyFrame import MyFrame
 
 
-class GitCommander(wx.App):
+class GitCommander(WxAsyncApp):
     frame: MyFrame
 
     def OnInit(self):

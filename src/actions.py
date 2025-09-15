@@ -2,7 +2,8 @@ import os
 import subprocess
 import sys
 from datetime import datetime
-from pickle import dump, load
+from pickle import dump, load, HIGHEST_PROTOCOL
+from typing import Callable
 
 
 def data_path(*relative_path: str) -> str:
@@ -23,7 +24,7 @@ PICKLE_FILE = data_path("repos.dat")
 REPOS_DIRECTORY = os.path.join(os.path.expanduser("~"), "repos")
 
 
-def load_repos() -> list[str]:
+async def load_repos() -> list[str]:
     """
     Load the repos from the pickle file.
     :return: a list of directories (str) that hold repos.
@@ -35,7 +36,12 @@ def load_repos() -> list[str]:
         return []
 
 
-def clone(repo_name: str) -> str:
+def save_repos(data: list[str]):
+    with open(PICKLE_FILE, 'wb') as file:
+        dump(data, file, HIGHEST_PROTOCOL)
+
+
+async def clone(repo_name: str) -> str:
     """
     Clones the given repo using the GitHub cli
     :param repo_name: The name of the repo from GitHub
@@ -49,7 +55,7 @@ def clone(repo_name: str) -> str:
     return path
 
 
-def push_repo(path: str):
+async def push_repo(path: str):
     """
     Push the given repo.
     :param path: The path to a repo.
@@ -62,7 +68,7 @@ def push_repo(path: str):
     subprocess.run(["git", "push"], cwd=path, check=False)
 
 
-def pull_repo(path: str):
+async def pull_repo(path: str):
     """
     Pull a given repo from GitHub
     :param path: The path to the repo
@@ -70,3 +76,20 @@ def pull_repo(path: str):
     """
     print(f"pulling {path}")
     subprocess.run(["git", "pull"], cwd=path, check=False)
+
+
+async def repo_search(receiver: Callable[[list[str]], None]):
+    home = os.path.expanduser('~')
+    repo_list = []
+    print('Searching for repos...')
+    for root, dirs, _ in os.walk(home):
+        if '.git' in dirs:
+            repo_list.append(root)
+            yield repo_list
+    if len(repo_list) > 1:
+        print(f"{len(repo_list)} repos found!")
+    elif len(repo_list) == 1:
+        print('Only 1 repo found.')
+    else:
+        print('No repos found.')
+    receiver(repo_list)

@@ -6,9 +6,13 @@ import sys
 import wx
 
 from console_output import ConsoleOutput
-
+from actions import repo_search
 
 # begin wxGlade: dependencies
+from wxasync import AsyncBind
+import asyncio
+
+
 # end wxGlade
 
 # begin wxGlade: extracode
@@ -60,17 +64,17 @@ class MyFrame(wx.Frame):
         grid_sizer_2 = wx.FlexGridSizer(2, 2, 0, 0)
         sizer_1.Add(grid_sizer_2, 10, wx.EXPAND, 0)
 
-        self.button_11 = wx.Button(self.all_repos, wx.ID_ANY, "Scan for repos")
-        grid_sizer_2.Add(self.button_11, 0, 0, 0)
+        self.btn_scan_for_repos = wx.Button(self.all_repos, wx.ID_ANY, "Scan for repos")
+        grid_sizer_2.Add(self.btn_scan_for_repos, 0, 0, 0)
 
-        self.button_12 = wx.Button(self.all_repos, wx.ID_ANY, "Remove invalid repos")
-        grid_sizer_2.Add(self.button_12, 0, 0, 0)
+        self.btn_rmv_invalid_repos = wx.Button(self.all_repos, wx.ID_ANY, "Remove invalid repos")
+        grid_sizer_2.Add(self.btn_rmv_invalid_repos, 0, 0, 0)
 
-        self.button_13 = wx.Button(self.all_repos, wx.ID_ANY, "Add new repo")
-        grid_sizer_2.Add(self.button_13, 0, 0, 0)
+        self.btn_add_repo = wx.Button(self.all_repos, wx.ID_ANY, "Add new repo")
+        grid_sizer_2.Add(self.btn_add_repo, 0, 0, 0)
 
-        self.button_14 = wx.Button(self.all_repos, wx.ID_ANY, "Remove repo")
-        grid_sizer_2.Add(self.button_14, 0, 0, 0)
+        self.btn_rm_repo = wx.Button(self.all_repos, wx.ID_ANY, "Remove repo")
+        grid_sizer_2.Add(self.btn_rm_repo, 0, 0, 0)
 
         self.working_repos = wx.Panel(self.split_pane, wx.ID_ANY)
 
@@ -136,10 +140,11 @@ class MyFrame(wx.Frame):
 
         self.list_all_repos.Bind(wx.EVT_SIZE, self.on_resize)
         self.list_working_repos.Bind(wx.EVT_SIZE, self.on_resize)
-        self.button_11.Bind(wx.EVT_BUTTON, self.scan_for_repos)
-        self.button_12.Bind(wx.EVT_BUTTON, self.remove_invalid_repos_from_all)
-        self.button_13.Bind(wx.EVT_BUTTON, self.add_new_repo_to_all)
-        self.button_14.Bind(wx.EVT_BUTTON, self.remove_repo_from_all)
+        # self.btn_scan_for_repos.Bind(wx.EVT_BUTTON, self.scan_for_repos)
+        AsyncBind(wx.EVT_BUTTON, self.scan_for_repos, self.btn_scan_for_repos)
+        self.btn_rmv_invalid_repos.Bind(wx.EVT_BUTTON, self.remove_invalid_repos_from_all)
+        self.btn_add_repo.Bind(wx.EVT_BUTTON, self.add_new_repo_to_all)
+        self.btn_rm_repo.Bind(wx.EVT_BUTTON, self.remove_repo_from_all)
         self.checkbox_1.Bind(wx.EVT_CHECKBOX, self.force_mode_changed)
         self.btn_reset.Bind(wx.EVT_BUTTON, self.reset_selected_repos)
         self.btn_pull.Bind(wx.EVT_BUTTON, self.pull_selected_repos)
@@ -155,9 +160,15 @@ class MyFrame(wx.Frame):
     def show_actions(self):
         self.notebook_1.SetSelection(0)
 
-    def scan_for_repos(self, event):  # wxGlade: MyFrame.<event_handler>
-        print("Event handler 'scan_for_repos' not implemented!")
+    async def scan_for_repos(self, event):  # wxGlade: MyFrame.<event_handler>
         self.show_log()
+
+        def set_list(repos: list[str]):
+            for item in repos:
+                self.list_all_repos.Append(item)
+
+        await repo_search(set_list)
+        self.show_actions()
         event.Skip()
 
     def remove_invalid_repos_from_all(self, event):  # wxGlade: MyFrame.<event_handler>
