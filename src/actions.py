@@ -1,9 +1,10 @@
+import asyncio
 import os
 import subprocess
 import sys
 from datetime import datetime
 from pickle import dump, load, HIGHEST_PROTOCOL
-from typing import Callable
+from typing import Callable, Any, AsyncGenerator
 
 
 def data_path(*relative_path: str) -> str:
@@ -36,7 +37,7 @@ async def load_repos() -> list[str]:
         return []
 
 
-def save_repos(data: list[str]):
+async def save_repos(data: list[str]):
     with open(PICKLE_FILE, 'wb') as file:
         dump(data, file, HIGHEST_PROTOCOL)
 
@@ -78,18 +79,19 @@ async def pull_repo(path: str):
     subprocess.run(["git", "pull"], cwd=path, check=False)
 
 
-async def repo_search(receiver: Callable[[list[str]], None]):
+async def repo_search() -> AsyncGenerator[str, Any]:
     home = os.path.expanduser('~')
     repo_list = []
     print('Searching for repos...')
     for root, dirs, _ in os.walk(home):
+        await asyncio.sleep(1)
         if '.git' in dirs:
             repo_list.append(root)
-            yield repo_list
+            # yield repo_list
+            yield root
     if len(repo_list) > 1:
         print(f"{len(repo_list)} repos found!")
     elif len(repo_list) == 1:
         print('Only 1 repo found.')
     else:
         print('No repos found.')
-    receiver(repo_list)

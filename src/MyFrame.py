@@ -42,7 +42,7 @@ class MyFrame(wx.Frame):
 
         self.list_all_repos = wx.ListCtrl(self.all_repos, wx.ID_ANY, style=wx.LC_HRULES | wx.LC_REPORT | wx.LC_VRULES)
         self.list_all_repos.SetToolTip("These are all the repos you have found on your system.")
-        self.list_all_repos.AppendColumn("Repo Location", format=wx.LIST_FORMAT_LEFT,
+        self.list_all_repos.AppendColumn("All Repos", format=wx.LIST_FORMAT_LEFT,
                                          width=self.list_all_repos.GetSize().GetWidth())
         sizer_2.Add(self.list_all_repos, 90, wx.EXPAND, 0)
 
@@ -83,7 +83,7 @@ class MyFrame(wx.Frame):
         self.list_working_repos = wx.ListCtrl(self.working_repos, wx.ID_ANY,
                                               style=wx.LC_HRULES | wx.LC_REPORT | wx.LC_VRULES)
         self.list_working_repos.SetToolTip("These are the repos you are currently working with.")
-        self.list_working_repos.AppendColumn("Repo Location", format=wx.LIST_FORMAT_LEFT,
+        self.list_working_repos.AppendColumn("Working Repos", format=wx.LIST_FORMAT_LEFT,
                                              width=self.list_working_repos.GetSize().GetWidth())
         sizer_3.Add(self.list_working_repos, 90, wx.EXPAND, 0)
 
@@ -163,11 +163,10 @@ class MyFrame(wx.Frame):
     async def scan_for_repos(self, event):  # wxGlade: MyFrame.<event_handler>
         self.show_log()
 
-        def set_list(repos: list[str]):
-            for item in repos:
-                self.list_all_repos.Append(item)
+        async for value in repo_search():
+            self.list_all_repos.InsertItem(self.list_all_repos.GetItemCount(), value)
+            print(value)
 
-        await repo_search(set_list)
         self.show_actions()
         event.Skip()
 
