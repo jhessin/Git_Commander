@@ -4,9 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a82acc0c-f7e3-49c7-b581-69f176b5dbcb" name="Changes" comment="Scanning for repos is now working!">
+    <list default="true" id="a82acc0c-f7e3-49c7-b581-69f176b5dbcb" name="Changes" comment="Add stub handlers for the center repo management buttons.">
+      <changelist_data name="Jim Hessin" email="jhessin@gmail.com" automatic="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/MyFrame.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/MyFrame.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/actions.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/actions.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -21,7 +23,13 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="PREVIOUS_COMMIT_AUTHORS">
+      <list>
+        <option value="Jim Hessin &lt;jhessin@gmail.com&gt;" />
+      </list>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="SIGN_OFF_COMMIT" value="true" />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
   &quot;lastFilter&quot;: {
@@ -35,6 +43,9 @@
     &quot;accountId&quot;: &quot;71bf777f-4e70-42dd-90de-3296fcc7a271&quot;
   }
 }</component>
+  <component name="MaliciousPackageCheckinHandlerState">
+    <option name="packageCheck" value="true" />
+  </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 8
 }</component>
@@ -184,7 +195,15 @@
       <option name="project" value="LOCAL" />
       <updated>1775610586966</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Add stub handlers for the center repo management buttons.">
+      <option name="closed" value="true" />
+      <created>1775611184588</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1775611184588</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -195,6 +214,10 @@
     <MESSAGE value="Tweaks" />
     <MESSAGE value="Adding coroutines" />
     <MESSAGE value="Scanning for repos is now working!" />
-    <option name="LAST_COMMIT_MESSAGE" value="Scanning for repos is now working!" />
+    <MESSAGE value="Add stub handlers for the center repo management buttons." />
+    <option name="LAST_COMMIT_MESSAGE" value="Add stub handlers for the center repo management buttons." />
+    <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
+    <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
+    <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
 </project>
