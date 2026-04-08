@@ -4,7 +4,7 @@ import subprocess
 import sys
 from datetime import datetime
 from pickle import dump, load, HIGHEST_PROTOCOL
-from typing import Callable, Any, AsyncGenerator
+from typing import Any, AsyncGenerator
 
 
 def data_path(*relative_path: str) -> str:
@@ -84,7 +84,7 @@ async def repo_search() -> AsyncGenerator[str, Any]:
     repo_list = []
     print('Searching for repos...')
     for root, dirs, _ in os.walk(home):
-        await asyncio.sleep(1)
+        await asyncio.sleep(.001)
         if '.git' in dirs:
             repo_list.append(root)
             # yield repo_list

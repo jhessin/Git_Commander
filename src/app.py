@@ -9,7 +9,7 @@
 
 import wx
 from wxasync import WxAsyncApp
-import asyncio
+
 from MyFrame import MyFrame
 
 
