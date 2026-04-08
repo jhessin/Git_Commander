@@ -138,6 +138,12 @@ class MyFrame(wx.Frame):
 
         self.Layout()
 
+        # Bind the repo management buttons
+        self.btn_rm.Bind(wx.EVT_BUTTON, self.remove_repo_from_working_set)
+        self.btn_add.Bind(wx.EVT_BUTTON, self.add_repo_to_working_set)
+        self.btn_clear.Bind(wx.EVT_BUTTON, self.clear_working_set)
+        self.btn_add_all.Bind(wx.EVT_BUTTON, self.add_all_repos_to_working_set)
+
         self.list_all_repos.Bind(wx.EVT_SIZE, self.on_resize)
         self.list_working_repos.Bind(wx.EVT_SIZE, self.on_resize)
         # self.btn_scan_for_repos.Bind(wx.EVT_BUTTON, self.scan_for_repos)
@@ -159,6 +165,18 @@ class MyFrame(wx.Frame):
 
     def show_actions(self):
         self.notebook_1.SetSelection(0)
+
+    def remove_repo_from_working_set(self, event):
+        print("Event handler 'remove_repo_from_working_set' not implemented!")
+
+    def add_repo_to_working_set(self, event):
+        print("Event handler 'add_repo_to_working_set' not implemented!")
+
+    def clear_working_set(self, event):
+        print("Event handler 'clear_working_set' not implemented!")
+
+    def add_all_repos_to_working_set(self, event):
+        print("Event handler 'add_all_repos_to_working_set' not implemented!")
 
     async def scan_for_repos(self, event):  # wxGlade: MyFrame.<event_handler>
         self.show_log()

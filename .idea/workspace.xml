@@ -4,11 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a82acc0c-f7e3-49c7-b581-69f176b5dbcb" name="Changes" comment="Adding coroutines">
-      <change beforePath="$PROJECT_DIR$/.idea/Git_Commander.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Git_Commander.iml" afterDir="false" />
+    <list default="true" id="a82acc0c-f7e3-49c7-b581-69f176b5dbcb" name="Changes" comment="Scanning for repos is now working!">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/MyFrame.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/MyFrame.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/actions.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/actions.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -178,7 +176,15 @@
       <option name="project" value="LOCAL" />
       <updated>1757905258529</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Scanning for repos is now working!">
+      <option name="closed" value="true" />
+      <created>1775610586966</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1775610586966</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -188,6 +194,7 @@
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="Tweaks" />
     <MESSAGE value="Adding coroutines" />
-    <option name="LAST_COMMIT_MESSAGE" value="Adding coroutines" />
+    <MESSAGE value="Scanning for repos is now working!" />
+    <option name="LAST_COMMIT_MESSAGE" value="Scanning for repos is now working!" />
   </component>
 </project>
