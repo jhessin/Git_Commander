@@ -70,6 +70,9 @@ CMakeLists.txt.user*
 # Python byte code
 *.pyc
 
+# PyCharm workspace file
+.idea/workspace.xml
+
 # Binaries
 # --------
 *.dll
