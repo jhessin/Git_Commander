@@ -72,7 +72,7 @@ class MyFrame(wx.Frame):
         self.btn_add_repo = wx.Button(self.all_repos, wx.ID_ANY, "Add new repo")
         grid_sizer_2.Add(self.btn_add_repo, 0, 0, 0)
 
-        self.btn_rm_repo = wx.Button(self.all_repos, wx.ID_ANY, "Remove repo")
+        self.btn_rm_repo = wx.Button(self.all_repos, wx.ID_ANY, "Remove repo(s)")
         grid_sizer_2.Add(self.btn_rm_repo, 0, 0, 0)
 
         self.working_repos = wx.Panel(self.split_pane, wx.ID_ANY)
@@ -167,26 +167,78 @@ class MyFrame(wx.Frame):
         self.notebook_1.SetSelection(0)
 
     def remove_repo_from_working_set(self, event: wx.CommandEvent):
-        print("Event handler 'remove_repo_from_working_set' not implemented!")
-        event.Skip()
+        src = self.list_working_repos
+        target = self.list_all_repos
+
+        item = src.GetFirstSelected(-1)
+
+        while src.GetSelectedItemCount() > 0:
+            # if item == wx.NOT_FOUND: return
+
+            item_name = src.GetItemText(item)
+            # print(item_name)
+
+            add_item_to_list(target, item_name)
+            src.DeleteItem(item)
+
+            item = src.GetNextSelected(item)
 
     def add_repo_to_working_set(self, event: wx.CommandEvent):
-        print("Event handler 'add_repo_to_working_set' not implemented!")
-        event.Skip()
+        src = self.list_all_repos
+        target = self.list_working_repos
+
+        item = src.GetFirstSelected(-1)
+
+        while src.GetSelectedItemCount() > 0:
+            # if item == wx.NOT_FOUND: return
+
+            item_name = src.GetItemText(item)
+            # print(item_name)
+
+            add_item_to_list(target, item_name)
+            item = src.GetNextSelected(item)
 
     def clear_working_set(self, event: wx.CommandEvent):
-        print("Event handler 'clear_working_set' not implemented!")
-        event.Skip()
+        src = self.list_working_repos
+        target = self.list_all_repos
+
+        item = src.GetNextItem(-1)
+
+        while src.GetItemCount() > 0:
+            if item != wx.NOT_FOUND:
+                item_name = src.GetItemText(item)
+                # print(item_name)
+
+                add_item_to_list(target, item_name)
+                src.DeleteItem(item)
+
+            item = src.GetNextItem(item)
+
+        # src.DeleteAllItems()
 
     def add_all_repos_to_working_set(self, event: wx.CommandEvent):
-        print("Event handler 'add_all_repos_to_working_set' not implemented!")
-        event.Skip()
+        src = self.list_all_repos
+        target = self.list_working_repos
+
+        item = src.GetNextItem(-1)
+
+        while True:
+            # if src.GetItemCount() == target.GetItemCount(): return
+            if item == wx.NOT_FOUND: return
+
+            item_name = src.GetItemText(item)
+            # print(item_name)
+
+            add_item_to_list(target, item_name)
+            # src.Select(item, 0 )
+
+            item = src.GetNextItem(item)
 
     async def scan_for_repos(self, event: wx.CommandEvent):  # wxGlade: MyFrame.<event_handler>
         self.show_log()
 
         async for value in repo_search():
-            self.list_all_repos.InsertItem(self.list_all_repos.GetItemCount(), value)
+            add_item_to_list(self.list_all_repos, value)
             print(value)
 
         self.show_actions()
@@ -201,8 +253,19 @@ class MyFrame(wx.Frame):
         event.Skip()
 
     def remove_repo_from_all(self, event: wx.CommandEvent):  # wxGlade: MyFrame.<event_handler>
-        print("Event handler 'remove_repo_from_all' not implemented!")
-        event.Skip()
+        src = self.list_all_repos
+
+        item = src.GetFirstSelected(-1)
+
+        while src.GetSelectedItemCount() > 0:
+            # if item == wx.NOT_FOUND: return
+
+            # item_name = src.GetItemText(item)
+            # print(item_name)
+
+            src.DeleteItem(item)
+
+            item = src.GetNextSelected(item)
 
     def force_mode_changed(self, event: wx.CommandEvent):  # wxGlade: MyFrame.<event_handler>
         print("Event handler 'force_mode_changed' not implemented!")
@@ -241,3 +304,27 @@ class MyFrame(wx.Frame):
         self.list_working_repos.SetColumnWidth(1, working_width)
         event.Skip()
 # end of class MyFrame
+
+
+def add_item_to_list(list_ctrl: wx.ListCtrl, repo_name: str):
+    index = list_ctrl.FindItem(-1, repo_name)
+    if index == wx.NOT_FOUND:
+        list_ctrl.InsertItem(list_ctrl.GetItemCount(), repo_name)
+
+
+def ctrl_to_str(list_ctrl: wx.ListCtrl) -> list[str]:
+    result = []
+
+    item = list_ctrl.GetNextItem(-1)
+    while True:
+        if item == wx.NOT_FOUND: return result
+
+        result.append(list_ctrl.GetItemText(item))
+
+        item = list_ctrl.GetNextItem(item)
+
+
+def str_to_ctrl(item_list: list[str], list_ctrl: wx.ListCtrl):
+    list_ctrl.DeleteAllItems()
+    for item in item_list:
+        add_item_to_list(list_ctrl, item)
