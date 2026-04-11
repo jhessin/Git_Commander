@@ -9,6 +9,7 @@ import wx.adv
 
 import list_management
 import menu_actions
+from DragSelectList import DragSelectList
 # begin wxGlade: dependencies
 from console_output import ConsoleOutput
 
@@ -43,7 +44,7 @@ class MyFrame(wx.Frame):
         sizer_2 = wx.BoxSizer(wx.HORIZONTAL)
         sizer_1.Add(sizer_2, 90, 0, 0)
 
-        self.list_all_repos = wx.ListCtrl(self.all_repos, wx.ID_ANY, style=wx.LC_HRULES | wx.LC_REPORT | wx.LC_VRULES)
+        self.list_all_repos = DragSelectList(self.all_repos)
         self.list_all_repos.SetToolTip("These are all the repos you have found on your system.")
         self.list_all_repos.AppendColumn("All Repos", format=wx.LIST_FORMAT_LEFT,
                                          width=self.list_all_repos.GetSize().GetWidth())
@@ -83,8 +84,7 @@ class MyFrame(wx.Frame):
 
         sizer_3 = wx.BoxSizer(wx.VERTICAL)
 
-        self.list_working_repos = wx.ListCtrl(self.working_repos, wx.ID_ANY,
-                                              style=wx.LC_HRULES | wx.LC_REPORT | wx.LC_VRULES)
+        self.list_working_repos = DragSelectList(self.working_repos)
         self.list_working_repos.SetToolTip("These are the repos you are currently working with.")
         self.list_working_repos.AppendColumn("Working Repos", format=wx.LIST_FORMAT_LEFT,
                                              width=self.list_working_repos.GetSize().GetWidth())
