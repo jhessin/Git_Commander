@@ -2,6 +2,7 @@ import asyncio
 
 import wx
 from wxasync import WxAsyncApp
+
 from MyFrame import MyFrame
 
 
@@ -21,3 +22,4 @@ async def main():
 
 if __name__ == "__main__":
     asyncio.run(main())
+    # main()
