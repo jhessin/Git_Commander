@@ -7,6 +7,17 @@ from pickle import dump, load, HIGHEST_PROTOCOL
 from typing import Any, AsyncGenerator
 
 
+def run_subprocess(cmd: list[str]):
+    try:
+        result = subprocess.run(cmd,
+                                capture_output=True,
+                                text=True,
+                                check=True,
+                                )
+        return result.stdout
+    except subprocess.CalledProcessError as e:
+        return e.stderr
+
 def data_path(*relative_path: str) -> str:
     """
     Get the absolute path of the data file from configuration.

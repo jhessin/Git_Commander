@@ -78,6 +78,7 @@ class MyFrame(wx.Frame):
         grid_sizer_2.Add(self.btn_add_repo, 0, 0, 0)
 
         self.btn_rm_repo = wx.Button(self.all_repos, wx.ID_ANY, "Remove repo(s)")
+        self.btn_rm_repo.Enable(False)
         grid_sizer_2.Add(self.btn_rm_repo, 0, 0, 0)
 
         self.working_repos = wx.Panel(self.split_pane, wx.ID_ANY)
@@ -93,8 +94,8 @@ class MyFrame(wx.Frame):
         grid_sizer_3 = wx.FlexGridSizer(3, 3, 0, 0)
         sizer_3.Add(grid_sizer_3, 10, wx.EXPAND, 0)
 
-        self.checkbox_1 = wx.CheckBox(self.working_repos, wx.ID_ANY, "Force Mode")
-        grid_sizer_3.Add(self.checkbox_1, 0, 0, 0)
+        self.force_mode = wx.CheckBox(self.working_repos, wx.ID_ANY, "Force Mode")
+        grid_sizer_3.Add(self.force_mode, 0, 0, 0)
 
         self.panel_1 = wx.Panel(self.working_repos, wx.ID_ANY)
         grid_sizer_3.Add(self.panel_1, 1, wx.EXPAND, 0)
@@ -103,21 +104,27 @@ class MyFrame(wx.Frame):
         grid_sizer_3.Add(self.panel_2, 1, wx.EXPAND, 0)
 
         self.btn_reset = wx.Button(self.working_repos, wx.ID_ANY, "Reset")
+        self.btn_reset.Enable(False)
         grid_sizer_3.Add(self.btn_reset, 0, 0, 0)
 
         self.btn_pull = wx.Button(self.working_repos, wx.ID_ANY, "Pull")
+        self.btn_pull.Enable(False)
         grid_sizer_3.Add(self.btn_pull, 0, 0, 0)
 
         self.btn_push = wx.Button(self.working_repos, wx.ID_ANY, "Push")
+        self.btn_push.Enable(False)
         grid_sizer_3.Add(self.btn_push, 0, 0, 0)
 
         self.btn_reset_all = wx.Button(self.working_repos, wx.ID_ANY, "Reset All")
+        self.btn_reset_all.Enable(False)
         grid_sizer_3.Add(self.btn_reset_all, 0, 0, 0)
 
         self.btn_pull_all = wx.Button(self.working_repos, wx.ID_ANY, "Pull All")
+        self.btn_pull_all.Enable(False)
         grid_sizer_3.Add(self.btn_pull_all, 0, 0, 0)
 
         self.btn_push_all = wx.Button(self.working_repos, wx.ID_ANY, "Push All")
+        self.btn_push_all.Enable(False)
         grid_sizer_3.Add(self.btn_push_all, 0, 0, 0)
 
         self.log_window = wx.TextCtrl(self.notebook_1, wx.ID_ANY, "", style=wx.TE_READONLY | wx.TE_MULTILINE)
@@ -147,13 +154,15 @@ class MyFrame(wx.Frame):
         # Bind events for resizing the window
         self.list_all_repos.Bind(wx.EVT_SIZE, self.on_resize)
         self.list_working_repos.Bind(wx.EVT_SIZE, self.on_resize)
+        self.list_working_repos.Bind(wx.EVT_LIST_ITEM_SELECTED, self.on_selection_changed)
+        self.list_working_repos.Bind(wx.EVT_LIST_ITEM_DESELECTED, self.on_selection_changed)
         # self.btn_scan_for_repos.Bind(wx.EVT_BUTTON, self.scan_for_repos)
         # AsyncBind(wx.EVT_BUTTON, list_management.scan_for_repos, self.btn_scan_for_repos)
         self.btn_scan_for_repos.Bind(wx.EVT_BUTTON, lambda _: list_management.scan_task(self))
         self.btn_rmv_invalid_repos.Bind(wx.EVT_BUTTON, self.remove_invalid_repos_from_all)
         self.btn_add_repo.Bind(wx.EVT_BUTTON, self.add_new_repo_to_all)
         self.btn_rm_repo.Bind(wx.EVT_BUTTON, self.remove_repo_from_all)
-        self.checkbox_1.Bind(wx.EVT_CHECKBOX, self.force_mode_changed)
+        self.force_mode.Bind(wx.EVT_CHECKBOX, self.force_toggled)
         self.btn_reset.Bind(wx.EVT_BUTTON, self.reset_selected_repos)
         self.btn_pull.Bind(wx.EVT_BUTTON, self.pull_selected_repos)
         self.btn_push.Bind(wx.EVT_BUTTON, self.push_selected_repos)
@@ -172,6 +181,18 @@ class MyFrame(wx.Frame):
         # Lastly forward the output to the log window.
         sys.stdout = ConsoleOutput(self.log_window)
         sys.stderr = ConsoleOutput(self.log_window)
+
+    def on_selection_changed(self, event: wx.Event):
+        self.btn_push.Enable(self.list_working_repos.GetSelectedItemCount() > 0)
+        self.btn_pull.Enable(self.list_working_repos.GetSelectedItemCount() > 0)
+        self.btn_rm_repo.Enable(self.list_working_repos.GetSelectedItemCount() > 0)
+        self.btn_reset.Enable(self.list_working_repos.GetSelectedItemCount() > 0)
+        self.btn_pull.Enable(self.list_working_repos.GetSelectedItemCount() > 0)
+        self.btn_push.Enable(self.list_working_repos.GetSelectedItemCount() > 0)
+        self.btn_reset_all.Enable(self.list_working_repos.GetItemCount() > 0)
+        self.btn_pull_all.Enable(self.list_working_repos.GetItemCount() > 0)
+        self.btn_push_all.Enable(self.list_working_repos.GetItemCount() > 0)
+        event.Skip()
 
     def on_idle_once(self, event: wx.IdleEvent) -> None:
         if not self.task_started:
@@ -217,16 +238,20 @@ class MyFrame(wx.Frame):
 
     def remove_repo_from_working_set(self, _event: wx.CommandEvent):
         list_management.move_selection(self.list_working_repos, self.list_all_repos)
+        self.on_selection_changed(_event)
 
     def add_repo_to_working_set(self, _event: wx.CommandEvent):
         list_management.copy_selection(self.list_all_repos, self.list_working_repos)
+        self.on_selection_changed(_event)
 
     def clear_working_set(self, _event: wx.CommandEvent):
         list_management.move_repos(self.list_working_repos, self.list_all_repos)
+        self.on_selection_changed(_event)
         # src.DeleteAllItems()
 
     def add_all_repos_to_working_set(self, _event: wx.CommandEvent):
         list_management.copy_repos(self.list_all_repos, self.list_working_repos)
+        self.on_selection_changed(_event)
 
     def remove_invalid_repos_from_all(self, event: wx.CommandEvent):  # wxGlade: MyFrame.<event_handler>
         print("Event handler 'remove_invalid_repos_from_all' not implemented!")
@@ -239,7 +264,7 @@ class MyFrame(wx.Frame):
     def remove_repo_from_all(self, _event: wx.CommandEvent):  # wxGlade: MyFrame.<event_handler>
         list_management.remove_selection(self.list_all_repos)
 
-    def force_mode_changed(self, event: wx.CommandEvent):  # wxGlade: MyFrame.<event_handler>
+    def force_toggled(self, event: wx.CommandEvent):  # wxGlade: MyFrame.<event_handler>
         print("Event handler 'force_mode_changed' not implemented!")
         event.Skip()
 
