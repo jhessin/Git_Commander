@@ -3,14 +3,14 @@ import asyncio
 import wx
 from wxasync import WxAsyncApp
 
-from MyFrame import MyFrame
+from MainFrame import MainFrame
 
 
 class GitCommander(WxAsyncApp):
-    frame: MyFrame
+    frame: MainFrame
 
     def OnInit(self):
-        self.frame = MyFrame(None, wx.ID_ANY, "")
+        self.frame = MainFrame(None, wx.ID_ANY, "")
         self.SetTopWindow(self.frame)
         self.frame.Show()
         return True
