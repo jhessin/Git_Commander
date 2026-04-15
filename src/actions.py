@@ -58,6 +58,7 @@ async def load_repos() -> list[str]:
     Load the repos from the pickle file.
     :return: a list of directories (str) that hold repos.
     """
+    # TODO Load the working list as well.
     if os.path.exists(PICKLE_FILE):
         with open(PICKLE_FILE, "rb") as file:
             return load(file)
@@ -65,6 +66,7 @@ async def load_repos() -> list[str]:
         return []
 
 async def save_repos(data: list[str]):
+    # TODO Save the working list as well.
     with open(PICKLE_FILE, 'wb') as file:
         dump(data, file, HIGHEST_PROTOCOL)
 
@@ -105,6 +107,14 @@ def pull_repo(path: str):
     print(f"pulling {path}")
     # subprocess.run(["git", "pull"], cwd=path, check=False)
     run_subprocess(["git", "pull"], cwd=path)
+
+def is_valid_repo(path: str) -> bool:
+    """
+    Validate the given repo. To see if it is a valid git repository.
+    :param path: The path to the repo
+    :return: True if the repo is valid, False otherwise
+    """
+    return os.path.exists(path) and '.git' in os.listdir(path)
 
 async def repo_search() -> AsyncGenerator[str, Any]:
     home = os.path.expanduser('~')
