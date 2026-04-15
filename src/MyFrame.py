@@ -181,6 +181,9 @@ class MyFrame(wx.Frame):
         self.Bind(wx.EVT_IDLE, self.on_idle_once)
         self.Bind(wx.EVT_CLOSE, self.on_exit)
 
+        # Set the main frame in the utils library
+        utils.set_main_frame(self)
+
         # Lastly forward the output to the log window.
         sys.stdout = ConsoleOutput(self.log_window)
         sys.stderr = ConsoleOutput(self.log_window)
@@ -271,40 +274,36 @@ class MyFrame(wx.Frame):
         self.is_forced = self.force_mode.IsChecked()
 
     def reset_selected_repos(self, event: wx.CommandEvent):  # wxGlade: MyFrame.<event_handler>
-        self.SetStatusText("Resetting selected repos")
         for item_name in utils.sel_to_str(self.list_working_repos):
+            self.SetStatusText(f"Resetting {item_name}")
             actions.reset_repo(item_name, self.is_forced)
         utils.finished(self)
 
     def pull_selected_repos(self, event: wx.CommandEvent):  # wxGlade: MyFrame.<event_handler>
-        self.SetStatusText("Pulling selected repos")
         for item_name in utils.sel_to_str(self.list_working_repos):
+            self.SetStatusText(f"Pulling {item_name}")
             actions.pull_repo(item_name)
-        utils.finished(self)
 
     def push_selected_repos(self, event: wx.CommandEvent):  # wxGlade: MyFrame.<event_handler>
-        self.SetStatusText("Pushing selected repos")
         for item_name in utils.sel_to_str(self.list_working_repos):
+            self.SetStatusText(f"Pushing {item_name}")
             actions.push_repo(item_name)
-        utils.finished(self)
 
     def reset_all_working_repos(self, event: wx.CommandEvent):  # wxGlade: MyFrame.<event_handler>
-        self.SetStatusText("Resetting all working repos")
         for item_name in utils.ctrl_to_str(self.list_working_repos):
+            self.SetStatusText(f"Resetting {item_name}")
             actions.reset_repo(item_name)
         utils.finished(self)
 
     def pull_all_repos(self, event: wx.CommandEvent):  # wxGlade: MyFrame.<event_handler>
-        self.SetStatusText("Pulling all repos")
         for item_name in utils.ctrl_to_str(self.list_working_repos):
+            self.SetStatusText(f"Pulling {item_name}")
             actions.pull_repo(item_name)
-        utils.finished(self)
 
     def push_all_repos(self, event: wx.CommandEvent):  # wxGlade: MyFrame.<event_handler>
-        self.SetStatusText("Pushing all repos")
         for item_name in utils.ctrl_to_str(self.list_working_repos):
+            self.SetStatusText(f"Pushing {item_name}")
             actions.push_repo(item_name)
-        utils.finished(self)
 
     def on_resize(self, event: wx.SizeEvent):  # wxGlade: MyFrame.<event_handler>
         # Get current width of the ListCtrl

@@ -9,6 +9,11 @@ from typing import Any, AsyncGenerator
 
 import wx
 
+import utils
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+    from MyFrame import MyFrame
+
 
 def _run_subprocess(cmd: list[str], *args, **kwargs):
     try:
@@ -17,7 +22,12 @@ def _run_subprocess(cmd: list[str], *args, **kwargs):
                                 text=True,
                                 check=True, *args, **kwargs
                                 )
-        wx.CallAfter(print, result.stdout)
+        frame: MyFrame | None = utils.Main_Frame
+        if frame:
+            wx.CallAfter(frame.log_window.AppendText, result.stdout)
+        else:
+            wx.CallAfter(print, result.stdout)
+        wx.CallAfter(utils.finished)
     except subprocess.CalledProcessError as e:
         wx.CallAfter(print, e.stderr)
 

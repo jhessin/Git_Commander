@@ -7,6 +7,11 @@ import wx
 if TYPE_CHECKING:
     from MyFrame import MyFrame
 
+Main_Frame: MyFrame | None = None
+
+def set_main_frame(frame: MyFrame):
+    global Main_Frame
+    Main_Frame = frame
 
 def run_async_task(coroutine: Coroutine[Any, Any, None]):
     loop = asyncio.get_event_loop()
@@ -49,5 +54,7 @@ def str_to_ctrl(item_list: list[str], list_ctrl: wx.ListCtrl):
         add_item_to_list(list_ctrl, item)
 
 
-def finished(frame: MyFrame):
-    frame.SetStatusText("Done - Ready.")
+def finished(frame: MyFrame | None = None):
+    frame = frame or Main_Frame
+    if frame:
+        frame.SetStatusText("Done - Ready.")
