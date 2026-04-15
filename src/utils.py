@@ -30,6 +30,18 @@ def ctrl_to_str(list_ctrl: wx.ListCtrl) -> list[str]:
 
     return result
 
+def sel_to_str(list_ctrl: wx.ListCtrl, reset: bool = True) -> list[str]:
+    result = []
+
+    item = list_ctrl.GetFirstSelected()
+    while item != wx.NOT_FOUND:
+        result.append(list_ctrl.GetItemText(item))
+        item = list_ctrl.GetNextSelected(item)
+        if reset:
+            list_ctrl.Select(item, 0)
+
+    return result
+
 
 def str_to_ctrl(item_list: list[str], list_ctrl: wx.ListCtrl):
     list_ctrl.DeleteAllItems()

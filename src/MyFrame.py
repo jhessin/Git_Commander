@@ -7,8 +7,10 @@ import sys
 import wx
 import wx.adv
 
+import actions
 import list_management
 import menu_actions
+import utils
 from DragSelectList import DragSelectList
 # begin wxGlade: dependencies
 from console_output import ConsoleOutput
@@ -23,6 +25,7 @@ from console_output import ConsoleOutput
 class MyFrame(wx.Frame):
     task_started = False
     exit_task_running = False
+    is_forced = False
 
     def __init__(self, *args, **kwargs):
         # begin wxGlade: MyFrame.__init__
@@ -265,32 +268,43 @@ class MyFrame(wx.Frame):
         list_management.remove_selection(self.list_all_repos)
 
     def force_toggled(self, event: wx.CommandEvent):  # wxGlade: MyFrame.<event_handler>
-        print("Event handler 'force_mode_changed' not implemented!")
-        event.Skip()
+        self.is_forced = self.force_mode.IsChecked()
 
     def reset_selected_repos(self, event: wx.CommandEvent):  # wxGlade: MyFrame.<event_handler>
-        print("Event handler 'reset_selected_repos' not implemented!")
-        event.Skip()
+        self.SetStatusText("Resetting selected repos")
+        for item_name in utils.sel_to_str(self.list_working_repos):
+            actions.reset_repo(item_name, self.is_forced)
+        utils.finished(self)
 
     def pull_selected_repos(self, event: wx.CommandEvent):  # wxGlade: MyFrame.<event_handler>
-        print("Event handler 'pull_selected_repos' not implemented!")
-        event.Skip()
+        self.SetStatusText("Pulling selected repos")
+        for item_name in utils.sel_to_str(self.list_working_repos):
+            actions.pull_repo(item_name)
+        utils.finished(self)
 
     def push_selected_repos(self, event: wx.CommandEvent):  # wxGlade: MyFrame.<event_handler>
-        print("Event handler 'push_selected_repos' not implemented!")
-        event.Skip()
+        self.SetStatusText("Pushing selected repos")
+        for item_name in utils.sel_to_str(self.list_working_repos):
+            actions.push_repo(item_name)
+        utils.finished(self)
 
     def reset_all_working_repos(self, event: wx.CommandEvent):  # wxGlade: MyFrame.<event_handler>
-        print("Event handler 'reset_all_working_repos' not implemented!")
-        event.Skip()
+        self.SetStatusText("Resetting all working repos")
+        for item_name in utils.ctrl_to_str(self.list_working_repos):
+            actions.reset_repo(item_name)
+        utils.finished(self)
 
     def pull_all_repos(self, event: wx.CommandEvent):  # wxGlade: MyFrame.<event_handler>
-        print("Event handler 'pull_all_repos' not implemented!")
-        event.Skip()
+        self.SetStatusText("Pulling all repos")
+        for item_name in utils.ctrl_to_str(self.list_working_repos):
+            actions.pull_repo(item_name)
+        utils.finished(self)
 
     def push_all_repos(self, event: wx.CommandEvent):  # wxGlade: MyFrame.<event_handler>
-        print("Event handler 'push_all_repos' not implemented!")
-        event.Skip()
+        self.SetStatusText("Pushing all repos")
+        for item_name in utils.ctrl_to_str(self.list_working_repos):
+            actions.push_repo(item_name)
+        utils.finished(self)
 
     def on_resize(self, event: wx.SizeEvent):  # wxGlade: MyFrame.<event_handler>
         # Get current width of the ListCtrl

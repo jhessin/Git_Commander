@@ -2,21 +2,30 @@ import asyncio
 import os
 import subprocess
 import sys
+import threading
 from datetime import datetime
 from pickle import dump, load, HIGHEST_PROTOCOL
 from typing import Any, AsyncGenerator
 
+import wx
 
-def run_subprocess(cmd: list[str]):
+
+def _run_subprocess(cmd: list[str], *args, **kwargs):
     try:
         result = subprocess.run(cmd,
                                 capture_output=True,
                                 text=True,
-                                check=True,
+                                check=True, *args, **kwargs
                                 )
-        return result.stdout
+        wx.CallAfter(print, result.stdout)
     except subprocess.CalledProcessError as e:
-        return e.stderr
+        wx.CallAfter(print, e.stderr)
+
+
+def run_subprocess(cmd: list[str], *args, **kwargs):
+    thread = threading.Thread(target=_run_subprocess, args=[cmd, *args], kwargs = kwargs)
+    thread.daemon = True
+    thread.start()
 
 def data_path(*relative_path: str) -> str:
     """
@@ -31,10 +40,8 @@ def data_path(*relative_path: str) -> str:
     os.makedirs(base_path, exist_ok=True)
     return os.path.join(base_path, *relative_path)
 
-
 PICKLE_FILE = data_path("repos.dat")
 REPOS_DIRECTORY = os.path.join(os.path.expanduser("~"), "repos")
-
 
 async def load_repos() -> list[str]:
     """
@@ -47,13 +54,11 @@ async def load_repos() -> list[str]:
     else:
         return []
 
-
 async def save_repos(data: list[str]):
     with open(PICKLE_FILE, 'wb') as file:
         dump(data, file, HIGHEST_PROTOCOL)
 
-
-async def clone(repo_name: str) -> str:
+def clone(repo_name: str) -> str:
     """
     Clones the given repo using the GitHub cli
     :param repo_name: The name of the repo from GitHub
@@ -63,11 +68,11 @@ async def clone(repo_name: str) -> str:
     os.makedirs(REPOS_DIRECTORY, exist_ok=True)
     path = os.path.join(REPOS_DIRECTORY, repo_name.split("/")[-1])
     print(f"cloning repo {repo_name} to {path}")
-    subprocess.run(["gh", "repo", "clone", repo_name, path], check=True)
+    # subprocess.run(["gh", "repo", "clone", repo_name, path], check=True)
+    run_subprocess(["gh", "repo", "clone", repo_name, path])
     return path
 
-
-async def push_repo(path: str):
+def push_repo(path: str):
     """
     Push the given repo.
     :param path: The path to a repo.
@@ -75,20 +80,21 @@ async def push_repo(path: str):
     """
     print(f"committing and pushing {path}")
     date = datetime.now()
-    subprocess.run(["git", "add", "."], cwd=path, check=False)
-    subprocess.run(["git", "commit", f'-m "{date}"'], cwd=path, check=False)
-    subprocess.run(["git", "push"], cwd=path, check=False)
+    # run_subprocess(["git", "add", "."], cwd=path, check=False)
+    subprocess.run(["git", "add", "."], cwd=path)
+    subprocess.run(["git", "commit", f'-m "{date}"'], cwd=path)
+    run_subprocess(["git", "push"], cwd=path)
+    # subprocess.run(["git", "push"], cwd=path, check=False)
 
-
-async def pull_repo(path: str):
+def pull_repo(path: str):
     """
     Pull a given repo from GitHub
     :param path: The path to the repo
     :return: None
     """
     print(f"pulling {path}")
-    subprocess.run(["git", "pull"], cwd=path, check=False)
-
+    # subprocess.run(["git", "pull"], cwd=path, check=False)
+    run_subprocess(["git", "pull"], cwd=path)
 
 async def repo_search() -> AsyncGenerator[str, Any]:
     home = os.path.expanduser('~')
@@ -106,3 +112,8 @@ async def repo_search() -> AsyncGenerator[str, Any]:
         print('Only 1 repo found.')
     else:
         print('No repos found.')
+
+def reset_repo(path: str, hard: bool = False):
+    print(f'resetting repo {path}')
+    cmd = ["git", "reset", "--hard"] if hard else ["git", "reset"]
+    subprocess.run(cmd, cwd=path)
