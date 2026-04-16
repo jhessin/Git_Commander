@@ -12,13 +12,15 @@ if TYPE_CHECKING:
 
 async def save(frame: MyFrame):
     await asyncio.sleep(1)
-    await actions.save_repos(utils.ctrl_to_str(frame.list_all_repos))
+    await actions.save_repos((utils.ctrl_to_str(frame.list_all_repos), utils.ctrl_to_str(frame.list_working_repos)))
     wx.CallAfter(utils.finished, frame)
 
 
 async def load(frame: MyFrame):
     await asyncio.sleep(1)
-    utils.str_to_ctrl(await actions.load_repos(), frame.list_all_repos)
+    all_repos, working_repos = await actions.load_repos()
+    utils.str_to_ctrl(all_repos, frame.list_all_repos)
+    utils.str_to_ctrl(working_repos, frame.list_working_repos)
     wx.CallAfter(utils.finished, frame)
 
 

@@ -53,7 +53,7 @@ def data_path(*relative_path: str) -> str:
 PICKLE_FILE = data_path("repos.dat")
 REPOS_DIRECTORY = os.path.join(os.path.expanduser("~"), "repos")
 
-async def load_repos() -> list[str]:
+async def load_repos() -> tuple[list[str], list[str]]:
     """
     Load the repos from the pickle file.
     :return: a list of directories (str) that hold repos.
@@ -63,9 +63,9 @@ async def load_repos() -> list[str]:
         with open(PICKLE_FILE, "rb") as file:
             return load(file)
     else:
-        return []
+        return [],[]
 
-async def save_repos(data: list[str]):
+async def save_repos(data: tuple[list[str], list[str]]) -> None:
     # TODO Save the working list as well.
     with open(PICKLE_FILE, 'wb') as file:
         dump(data, file, HIGHEST_PROTOCOL)

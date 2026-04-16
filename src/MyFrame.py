@@ -260,13 +260,14 @@ class MyFrame(wx.Frame):
         self.on_selection_changed(_event)
 
     def remove_invalid_repos_from_all(self, event: wx.CommandEvent):  # wxGlade: MyFrame.<event_handler>
-        # TODO move this into an Async function
-        item = self.list_all_repos.GetNextItem(-1)
-
-        while item != -1:
-            item_name = self.list_all_repos.GetItemText(item)
+        self.SetStatusText("Removing invalid repositories")
+        for row in range(self.list_all_repos.GetItemCount()):
+            item_name = self.list_all_repos.GetItem(row).GetText()
             if not actions.is_valid_repo(item_name):
-                self.list_all_repos.DeleteItem(item)
+                self.list_all_repos.DeleteItem(row)
+            else:
+                print(f"{item_name} is good!")
+        utils.finished(self)
 
 
     def add_new_repo_to_all(self, event: wx.CommandEvent):  # wxGlade: MyFrame.<event_handler>
