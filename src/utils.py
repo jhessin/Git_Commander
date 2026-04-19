@@ -5,11 +5,11 @@ from typing import TYPE_CHECKING
 import wx
 
 if TYPE_CHECKING:
-    from MyFrame import MyFrame
+    from MainFrame import MainFrame
 
-Main_Frame: MyFrame | None = None
+Main_Frame: MainFrame | None = None
 
-def set_main_frame(frame: MyFrame):
+def set_main_frame(frame: MainFrame):
     global Main_Frame
     Main_Frame = frame
 
@@ -54,7 +54,7 @@ def str_to_ctrl(item_list: list[str], list_ctrl: wx.ListCtrl):
         add_item_to_list(list_ctrl, item)
 
 
-def finished(frame: MyFrame | None = None):
+def finished(frame: MainFrame | None = None):
     frame = frame or Main_Frame
     if frame:
         frame.SetStatusText("Done - Ready.")

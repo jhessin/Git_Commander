@@ -1,3 +1,5 @@
+import asyncio
+from asyncio import Queue
 from typing import TYPE_CHECKING
 
 import wx
@@ -6,20 +8,29 @@ import actions
 import utils
 
 if TYPE_CHECKING:
-    from MyFrame import MyFrame
+    from MainFrame import MainFrame
 
 
-async def _scan_for_repos(frame: MyFrame):
-    frame.SetStatusText("Scanning...")
+async def _scan_for_repos(frame: MainFrame, queue: Queue):
 
     async for value in actions.repo_search():
+        msg = await queue.get()
+        if msg == "STOP":
+            break
         utils.add_item_to_list(frame.list_all_repos, value)
 
-    frame.SetStatusText("Done. - Ready.")
+    wx.CallAfter(frame.finished_scanning)
 
 
-def scan_task(frame: MyFrame):
-    utils.run_async_task(_scan_for_repos(frame))
+def scan_task(frame: MainFrame):
+    if frame.is_scanning:
+        frame.queue.put_nowait("STOP")
+        frame.is_scanning = False
+    else:
+        frame.is_scanning = True
+        frame.btn_scan_for_repos.SetLabel("Stop Scanning")
+        frame.SetStatusText("Scanning...")
+        utils.run_async_task(_scan_for_repos(frame, frame.queue))
 
 
 def copy_repos(src: wx.ListCtrl, target: wx.ListCtrl):

@@ -12,7 +12,7 @@ import wx
 import utils
 from typing import TYPE_CHECKING
 if TYPE_CHECKING:
-    from MyFrame import MyFrame
+    from MainFrame import MainFrame
 
 
 def _run_subprocess(cmd: list[str], *args, **kwargs):
@@ -22,7 +22,7 @@ def _run_subprocess(cmd: list[str], *args, **kwargs):
                                 text=True,
                                 check=True, *args, **kwargs
                                 )
-        frame: MyFrame | None = utils.Main_Frame
+        frame: MainFrame | None = utils.Main_Frame
         if frame:
             wx.CallAfter(frame.log_window.AppendText, result.stdout)
         else:
@@ -58,7 +58,6 @@ async def load_repos() -> tuple[list[str], list[str]]:
     Load the repos from the pickle file.
     :return: a list of directories (str) that hold repos.
     """
-    # TODO Load the working list as well.
     if os.path.exists(PICKLE_FILE):
         with open(PICKLE_FILE, "rb") as file:
             return load(file)
@@ -66,7 +65,6 @@ async def load_repos() -> tuple[list[str], list[str]]:
         return [],[]
 
 async def save_repos(data: tuple[list[str], list[str]]) -> None:
-    # TODO Save the working list as well.
     with open(PICKLE_FILE, 'wb') as file:
         dump(data, file, HIGHEST_PROTOCOL)
 
