@@ -33,6 +33,9 @@ class MainFrame(wx.Frame):
 
     def __init__(self, *args, **kwargs):
         # begin wxGlade: MyFrame.__init__
+        # Set the main frame in the utils library
+        utils.set_main_frame(self)
+        
         kwargs["style"] = kwargs.get("style", 0) | wx.DEFAULT_FRAME_STYLE
         wx.Frame.__init__(self, *args, **kwargs)
         self.SetSize(wx.Size(1057, 1039))
@@ -187,8 +190,6 @@ class MainFrame(wx.Frame):
         self.Bind(wx.EVT_IDLE, self.on_idle_once)
         self.Bind(wx.EVT_CLOSE, self.on_exit)
 
-        # Set the main frame in the utils library
-        utils.set_main_frame(self)
 
         # Lastly forward the output to the log window.
         sys.stdout = ConsoleOutput(self.log_window)
