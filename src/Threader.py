@@ -1,4 +1,4 @@
-from typing import TYPE_CHECKING, Coroutine
+from typing import TYPE_CHECKING, Coroutine, Any, AsyncGenerator
 
 if TYPE_CHECKING:
     from MainFrame import MainFrame
@@ -11,7 +11,6 @@ import threading
 import wx
 from datetime import datetime
 from pickle import dump, load, HIGHEST_PROTOCOL
-from typing import Any, AsyncGenerator
 
 
 class Threader:
@@ -22,9 +21,9 @@ class Threader:
         self.frame = frame
 
     @staticmethod
-    def run_async_task(coroutine: Coroutine[Any, Any, Any]):
+    def run_async_task(coroutine: Coroutine[Any, Any, None]):
         loop = asyncio.get_event_loop()
-        return asyncio.ensure_future(coroutine, loop=loop)
+        asyncio.ensure_future(coroutine, loop=loop)
 
     def _run_subprocess(self, cmd: list[str], *args, **kwargs):
         try:
@@ -44,7 +43,7 @@ class Threader:
         thread.start()
 
     @staticmethod
-    async def load_repos() -> tuple[list[str], list[str]]:
+    async def load_repos() -> tuple[list[Any], list[Any]] | None | Any:
         """
         Load the repositories from the pickle file
         :return: a tuple of two directory lists, first the list of all repositories
