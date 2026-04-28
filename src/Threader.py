@@ -67,7 +67,7 @@ class Threader:
         with open(Consts.PICKLE_FILE, "wb") as f:
             dump(repos, f, HIGHEST_PROTOCOL)
 
-    def push_repo(self, path: str):
+    def push_repo(self, path: str, force: bool = False):
         """
         Push the given repository to the origin.
         :param path: The path of the repository to push.
@@ -76,7 +76,7 @@ class Threader:
         date = datetime.now().strftime("%Y%m%d%H%M%S")
         subprocess.run(['git', 'add', '.'], cwd=path)
         subprocess.run(['git', 'commit', f"-m {date}"], cwd=path)
-        self.run_subprocess(["git", "push"])
+        self.run_subprocess(["git", "push", "-f"] if force else ["git", "push"], cwd=path)
 
     def pull_repo(self, path: str):
         """

@@ -311,7 +311,7 @@ class MainFrame(wx.Frame):
     def push_selected_repos(self, event: wx.CommandEvent):  # wxGlade: MyFrame.<event_handler>
         for item_name in self.list_working_repos.list_from_sel():
             self.SetStatusText(f"Pushing {item_name}")
-            self.threader.push_repo(item_name)
+            self.threader.push_repo(item_name, self.is_forced)
 
     def reset_all_working_repos(self, event: wx.CommandEvent):  # wxGlade: MyFrame.<event_handler>
         for item_name in self.list_working_repos.to_str_list():
