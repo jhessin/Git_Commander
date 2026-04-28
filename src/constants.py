@@ -16,20 +16,19 @@ def data_path(*relative_path: str) -> str:
     return os.path.join(base_path, *relative_path)
 
 
-class classproperty(property):
-    def __init__(self, func):
-        super().__init__()
-        self.func = func
+class classproperty:
+    def __init__(self, fget):
+        self.fget = fget
 
-    def __get__(self, cls, owner):
-        return self.func(owner)
+    def __get__(self, instance, owner):
+        return self.fget(owner)
 
 
 class Consts:
     @classproperty
-    def PICKLE_FILE(self) -> str:
+    def PICKLE_FILE(cls) -> str:
         return data_path('repos.dat')
 
     @classproperty
-    def REPOS_DIRECTORY(self) -> str:
+    def REPOS_DIRECTORY(cls) -> str:
         return os.path.join(os.path.expanduser("~"), "repos")
