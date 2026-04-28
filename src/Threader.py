@@ -70,6 +70,7 @@ class Threader:
     def push_repo(self, path: str, force: bool = False):
         """
         Push the given repository to the origin.
+        :param force: Forces an overwrite of the repository.
         :param path: The path of the repository to push.
         :return: None
         """
