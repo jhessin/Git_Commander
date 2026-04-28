@@ -11,11 +11,10 @@ import wx.adv
 import actions
 import list_management
 import menu_actions
-import utils
 from DragSelectList import DragSelectList
+from Threader import Threader
 # begin wxGlade: dependencies
 from console_output import ConsoleOutput
-from utils import add_item_to_list
 
 
 # end wxGlade
@@ -34,8 +33,8 @@ class MainFrame(wx.Frame):
     def __init__(self, *args, **kwargs):
         # begin wxGlade: MyFrame.__init__
         # Set the main frame in the utils library
-        utils.set_main_frame(self)
-        
+        self.threader = Threader(self)
+
         kwargs["style"] = kwargs.get("style", 0) | wx.DEFAULT_FRAME_STYLE
         wx.Frame.__init__(self, *args, **kwargs)
         self.SetSize(wx.Size(1057, 1039))
@@ -195,7 +194,7 @@ class MainFrame(wx.Frame):
         sys.stdout = ConsoleOutput(self.log_window)
         sys.stderr = ConsoleOutput(self.log_window)
 
-    def on_selection_changed(self, event: wx.Event):
+    def on_selection_changed(self, event: wx.Event | None = None) -> None:
         """Check if buttons are valid actions and enables them if they are."""
         self.btn_push.Enable(self.list_working_repos.GetSelectedItemCount() > 0)
         self.btn_pull.Enable(self.list_working_repos.GetSelectedItemCount() > 0)
@@ -206,7 +205,8 @@ class MainFrame(wx.Frame):
         self.btn_reset_all.Enable(self.list_working_repos.GetItemCount() > 0)
         self.btn_pull_all.Enable(self.list_working_repos.GetItemCount() > 0)
         self.btn_push_all.Enable(self.list_working_repos.GetItemCount() > 0)
-        event.Skip()
+        if event is not None:
+            event.Skip()
 
     def on_idle_once(self, event: wx.IdleEvent) -> None:
         if not self.task_started:
@@ -279,7 +279,7 @@ class MainFrame(wx.Frame):
         for row in reversed(rows_to_delete):
             self.list_all_repos.DeleteItem(row)
 
-        utils.finished(self)
+        self.finished()
 
 
     def add_new_repo_to_all(self, event: wx.CommandEvent):  # wxGlade: MyFrame.<event_handler>
@@ -289,7 +289,7 @@ class MainFrame(wx.Frame):
                 # Get the selected directory path
                 selected_dir = dlg.GetPath()
                 if actions.is_valid_repo(selected_dir):
-                    add_item_to_list(self.list_all_repos, selected_dir)
+                    self.list_all_repos.add_item(selected_dir)
 
     def remove_repo_from_all(self, _event: wx.CommandEvent):  # wxGlade: MyFrame.<event_handler>
         list_management.remove_selection(self.list_all_repos)
@@ -298,36 +298,36 @@ class MainFrame(wx.Frame):
         self.is_forced = self.force_mode.IsChecked()
 
     def reset_selected_repos(self, event: wx.CommandEvent):  # wxGlade: MyFrame.<event_handler>
-        for item_name in utils.sel_to_str(self.list_working_repos):
+        for item_name in self.list_working_repos.list_from_sel():
             self.SetStatusText(f"Resetting {item_name}")
-            actions.reset_repo(item_name, self.is_forced)
-        utils.finished(self)
+            self.threader.reset_repo(item_name, self.is_forced)
+        self.finished()
 
     def pull_selected_repos(self, event: wx.CommandEvent):  # wxGlade: MyFrame.<event_handler>
-        for item_name in utils.sel_to_str(self.list_working_repos):
+        for item_name in self.list_working_repos.list_from_sel():
             self.SetStatusText(f"Pulling {item_name}")
-            actions.pull_repo(item_name)
+            self.threader.pull_repo(item_name)
 
     def push_selected_repos(self, event: wx.CommandEvent):  # wxGlade: MyFrame.<event_handler>
-        for item_name in utils.sel_to_str(self.list_working_repos):
+        for item_name in self.list_working_repos.list_from_sel():
             self.SetStatusText(f"Pushing {item_name}")
-            actions.push_repo(item_name)
+            self.threader.push_repo(item_name)
 
     def reset_all_working_repos(self, event: wx.CommandEvent):  # wxGlade: MyFrame.<event_handler>
-        for item_name in utils.ctrl_to_str(self.list_working_repos):
+        for item_name in self.list_working_repos.to_str_list():
             self.SetStatusText(f"Resetting {item_name}")
-            actions.reset_repo(item_name)
-        utils.finished(self)
+            self.threader.reset_repo(item_name)
+        self.finished()
 
     def pull_all_repos(self, event: wx.CommandEvent):  # wxGlade: MyFrame.<event_handler>
-        for item_name in utils.ctrl_to_str(self.list_working_repos):
+        for item_name in self.list_working_repos.to_str_list():
             self.SetStatusText(f"Pulling {item_name}")
-            actions.pull_repo(item_name)
+            self.threader.pull_repo(item_name)
 
     def push_all_repos(self, event: wx.CommandEvent):  # wxGlade: MyFrame.<event_handler>
-        for item_name in utils.ctrl_to_str(self.list_working_repos):
+        for item_name in self.list_working_repos.to_str_list():
             self.SetStatusText(f"Pushing {item_name}")
-            actions.push_repo(item_name)
+            self.threader.push_repo(item_name)
 
     def on_resize(self, event: wx.SizeEvent):  # wxGlade: MyFrame.<event_handler>
         # Get current width of the ListCtrl
@@ -338,8 +338,11 @@ class MainFrame(wx.Frame):
         self.list_working_repos.SetColumnWidth(1, working_width)
         event.Skip()
 
+    def finished(self):
+        self.SetStatusText("Done - Ready.")
+
     def finished_scanning(self):
         print("Finished scanning")
         self.btn_scan_for_repos.SetLabel("Scan for repos")
-        utils.finished(self)
+        self.finished()
 # end of class MyFrame

@@ -20,3 +20,36 @@ class DragSelectList(wx.ListCtrl):
             if current_item != -1:
                 self.Select(current_item)
         event.Skip()
+
+    def add_item(self, item: str):
+        index = self.FindItem(-1, item)
+        if index == wx.NOT_FOUND:
+            self.InsertItem(self.GetItemCount(), item)
+
+    def to_str_list(self) -> list[str]:
+        result = []
+
+        item = self.GetNextItem(-1)
+        while item != wx.NOT_FOUND:
+            result.append(self.GetItemText(item))
+
+            item = self.GetNextItem(item)
+
+        return result
+
+    def from_str_list(self, str_list: list[str]):
+        self.DeleteAllItems()
+        for item in str_list:
+            self.add_item(item)
+
+    def list_from_sel(self, reset: bool = True) -> list[str]:
+        result = []
+
+        item = self.GetFirstSelected(-1)
+        while item != wx.NOT_FOUND:
+            result.append(self.GetItemText(item))
+            item = self.GetNextSelected(item)
+            if reset:
+                self.Select(item, 0)
+
+        return result

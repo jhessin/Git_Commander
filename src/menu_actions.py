@@ -2,43 +2,45 @@ import asyncio
 from typing import TYPE_CHECKING
 
 import wx
-
 import actions
-import utils
 
 if TYPE_CHECKING:
     from MainFrame import MainFrame
 
 
-async def save(frame: MainFrame):
+async def _save(frame: MainFrame):
     await asyncio.sleep(1)
-    await actions.save_repos((utils.ctrl_to_str(frame.list_all_repos), utils.ctrl_to_str(frame.list_working_repos)))
-    wx.CallAfter(utils.finished, frame)
+    await frame.threader.save_repos((frame.list_all_repos.to_str_list(), frame.list_working_repos.to_str_list()))
+    wx.CallAfter(frame.finished)
 
 
-async def load(frame: MainFrame):
+async def _load(frame: MainFrame):
     await asyncio.sleep(1)
-    all_repos, working_repos = await actions.load_repos()
-    utils.str_to_ctrl(all_repos, frame.list_all_repos)
-    utils.str_to_ctrl(working_repos, frame.list_working_repos)
-    wx.CallAfter(utils.finished, frame)
+    try:
+        all_repos, working_repos = await frame.threader.load_repos()
+    except TypeError:
+        all_repos, working_repos = [], []
+    frame.list_all_repos.from_str_list(all_repos)
+    frame.list_working_repos.from_str_list(working_repos)
+    wx.CallAfter(frame.finished)
+    wx.CallAfter(frame.on_selection_changed)
 
 
-async def final_save(frame: MainFrame):
-    await save(frame)
+async def _final_save(frame: MainFrame):
+    await _save(frame)
     wx.CallAfter(frame.Close, True)
 
 
 def save_task(frame: MainFrame):
     frame.SetStatusText("Saving...")
-    utils.run_async_task(save(frame))
+    frame.threader.run_async_task(_save(frame))
 
 
 def load_task(frame: MainFrame):
     frame.SetStatusText("Loading...")
-    utils.run_async_task(load(frame))
+    frame.threader.run_async_task(_load(frame))
 
 
 def final_save_task(frame: MainFrame):
     frame.SetStatusText("Saving before quitting...")
-    utils.run_async_task(final_save(frame))
+    frame.threader.run_async_task(_final_save(frame))
