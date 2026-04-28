@@ -35,7 +35,7 @@ class Threader:
             wx.CallAfter(self.frame.log_window.AppendText, result.stdout)
             wx.CallAfter(self.frame.finished)
         except subprocess.CalledProcessError as e:
-            wx.CallAfter(print, e.stderr)
+            wx.CallAfter(self.frame.log_window.AppendText, e.stderr)
 
     def run_subprocess(self, cmd: list[str], *args, **kwargs):
         thread = threading.Thread(target=self._run_subprocess, args=[cmd, *args], kwargs=kwargs)
@@ -57,7 +57,7 @@ class Threader:
             return [], []
 
     @staticmethod
-    def save_repos(repos: tuple[list[str], list[str]]) -> None:
+    async def save_repos(repos: tuple[list[str], list[str]]) -> None:
         """
         Save the repositories to the pickle file
         :param repos: A tuple of two directory lists, first the list of all repositories
