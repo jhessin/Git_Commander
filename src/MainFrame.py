@@ -316,7 +316,7 @@ class MainFrame(wx.Frame):
     def reset_all_working_repos(self, event: wx.CommandEvent):  # wxGlade: MyFrame.<event_handler>
         for item_name in self.list_working_repos.to_str_list():
             self.SetStatusText(f"Resetting {item_name}")
-            self.threader.reset_repo(item_name)
+            self.threader.reset_repo(item_name, self.is_forced)
         self.finished()
 
     def pull_all_repos(self, event: wx.CommandEvent):  # wxGlade: MyFrame.<event_handler>
@@ -327,7 +327,7 @@ class MainFrame(wx.Frame):
     def push_all_repos(self, event: wx.CommandEvent):  # wxGlade: MyFrame.<event_handler>
         for item_name in self.list_working_repos.to_str_list():
             self.SetStatusText(f"Pushing {item_name}")
-            self.threader.push_repo(item_name)
+            self.threader.push_repo(item_name, self.is_forced)
 
     def on_resize(self, event: wx.SizeEvent):  # wxGlade: MyFrame.<event_handler>
         # Get current width of the ListCtrl
