@@ -8,13 +8,11 @@ from asyncio import Queue
 import wx
 import wx.adv
 
-import actions
-import list_management
-import menu_actions
-from DragSelectList import DragSelectList
-from Threader import Threader
+from . import actions, list_management, menu_actions
+from .DragSelectList import DragSelectList
+from .Threader import Threader
 # begin wxGlade: dependencies
-from console_output import ConsoleOutput
+from .console_output import ConsoleOutput
 
 
 # end wxGlade

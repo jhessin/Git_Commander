@@ -1,6 +1,5 @@
 # Python 3
 import wx
-import sys
 
 
 # Custom class to redirect console output to a wx.TextCtrl

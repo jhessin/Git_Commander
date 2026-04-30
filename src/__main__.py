@@ -3,7 +3,7 @@ import asyncio
 import wx
 from wxasync import WxAsyncApp
 
-from MainFrame import MainFrame
+from .MainFrame import MainFrame
 
 
 class GitCommander(WxAsyncApp):
@@ -16,10 +16,13 @@ class GitCommander(WxAsyncApp):
         return True
 
 
-async def main():
+async def main_async():
     app = GitCommander(1)
     await app.MainLoop()
 
+def main():
+    asyncio.run(main_async())
+
+
 if __name__ == "__main__":
-    asyncio.run(main())
-    # main()
+    main()

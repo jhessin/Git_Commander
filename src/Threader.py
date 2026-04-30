@@ -3,7 +3,7 @@ from typing import TYPE_CHECKING, Coroutine, Any, AsyncGenerator
 if TYPE_CHECKING:
     from MainFrame import MainFrame
 
-from constants import Consts
+from .constants import Consts
 import asyncio
 import os
 import subprocess
@@ -30,7 +30,7 @@ class Threader:
             result = subprocess.run(cmd,
                                     capture_output=True,
                                     text=True,
-                                    check=True, *args, **kwargs
+                                    *args, **kwargs
                                     )
             wx.CallAfter(self.frame.log_window.AppendText, result.stdout)
             wx.CallAfter(self.frame.finished)
@@ -76,7 +76,8 @@ class Threader:
         """
         date = datetime.now().strftime("%Y%m%d%H%M%S")
         subprocess.run(['git', 'add', '.'], cwd=path)
-        subprocess.run(['git', 'commit', f"-m {date}"], cwd=path)
+        result = subprocess.run(['git', 'commit', f"-m {date}"], cwd=path, capture_output=True, text=True)
+        self.frame.log_window.AppendText(result.stdout)
         self.run_subprocess(["git", "push", "-f"] if force else ["git", "push"], cwd=path)
 
     def pull_repo(self, path: str):

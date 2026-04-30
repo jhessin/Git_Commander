@@ -2,7 +2,6 @@ import asyncio
 from typing import TYPE_CHECKING
 
 import wx
-import actions
 
 if TYPE_CHECKING:
     from MainFrame import MainFrame

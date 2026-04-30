@@ -4,8 +4,8 @@ from typing import TYPE_CHECKING
 
 import wx
 
-import actions
-from DragSelectList import DragSelectList
+from . import actions
+from .DragSelectList import DragSelectList
 
 if TYPE_CHECKING:
     from MainFrame import MainFrame
