@@ -75,9 +75,8 @@ class Threader:
         :return: None
         """
         date = datetime.now().strftime("%Y%m%d%H%M%S")
-        subprocess.run(['git', 'add', '.'], cwd=path)
-        result = subprocess.run(['git', 'commit', f"-m {date}"], cwd=path, capture_output=True, text=True)
-        self.frame.log_window.AppendText(result.stdout)
+        self._run_subprocess(['git', 'add', '.'], cwd=path)
+        self._run_subprocess(['git', 'commit', f"-m {date}"], cwd=path)
         self.run_subprocess(["git", "push", "-f"] if force else ["git", "push"], cwd=path)
 
     def pull_repo(self, path: str):
@@ -110,7 +109,7 @@ class Threader:
     def reset_repo(path: str, force: bool = False):
         print(f"Resetting repository {path}")
         cmd = ["git", "reset", "--hard"] if force else ["git", "reset"]
-        subprocess.run(cmd, cwd=path)
+        self._run_subprocess(cmd, cwd=path)
 
     async def _scan_for_repos(self):
         """
@@ -145,6 +144,6 @@ class Threader:
         os.makedirs(Consts.REPOS_DIRECTORY, exist_ok=True)
         path = os.path.join(Consts.REPOS_DIRECTORY, repo_name.split("/")[-1])
         print(f"cloning repo {repo_name} to {path}")
-        # subprocess.run(["gh", "repo", "clone", repo_name, path], check=True)
+        # self._run_subprocess(["gh", "repo", "clone", repo_name, path], check=True)
         self.run_subprocess(["gh", "repo", "clone", repo_name, path])
         return path
