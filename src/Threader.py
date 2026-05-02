@@ -154,7 +154,7 @@ class Threader:
         except json.decoder.JSONDecodeError as e:
             return [('gh was not installed or not logged in', str(e))]
 
-    def clone_repo(self, repo_url: str, target_dir: str = consts.REPOS_DIRECTORY):
+    def clone_repo(self, repo_url: str, target_dir: str = consts.REPOS_DIRECTORY) -> str:
         f"""
         Clones the given repo using the git command
         :param repo_url: The url of the repo to clone.
@@ -165,6 +165,7 @@ class Threader:
         path = os.path.join(target_dir, repo_url.split("/")[-1])
         print(f"cloning repo {repo_url} to {path}")
         self.run_subprocess(["git", "clone", repo_url, path])
+        return path
 
     def clone_with_gh(self, repo_name: str, target_dir: str = consts.REPOS_DIRECTORY) -> str:
         f"""
