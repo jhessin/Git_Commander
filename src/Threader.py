@@ -66,6 +66,7 @@ class Threader:
         """
         with open(consts.PICKLE_FILE, "wb") as f:
             dump(repos, f, HIGHEST_PROTOCOL)
+        print('repository lists saved')
 
     def push_repo(self, path: str, force: bool = False):
         """
@@ -74,6 +75,7 @@ class Threader:
         :param path: The path of the repository to push.
         :return: None
         """
+        print(f'Pushing repository {path}')
         date = datetime.now().strftime("%Y%m%d%H%M%S")
         self._run_subprocess(['git', 'add', '.'], cwd=path)
         self._run_subprocess(['git', 'commit', f"-m {date}"], cwd=path)
@@ -85,6 +87,7 @@ class Threader:
         :param path: The path of the repository to pull.
         :return: None
         """
+        print(f'Pulling repository {path}')
         self.run_subprocess(["git", "pull"], cwd=path)
 
     @staticmethod
