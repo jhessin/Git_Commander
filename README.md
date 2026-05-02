@@ -32,9 +32,37 @@ collaboration, but for multi-computer colaboration.
 To install Git Commander you first need to have git (obviously) and the [Github
 Cli tool](https://cli.github.com/).
 
-Once that is done you can download the 
+Once that is done you can download the
 [latest release](https://github.com/jhessin/Git_Commander/releases/latest).
 
-Git Commander is a single file executable, it should run without any other
-supporting files. It does store a single config file with your list of repos.
+To get the current test version you can clone this repository and use 
+[Poetry](https://python-poetry.org/) to install it
+
+```bash
+poetry install
+```
+
+Afterward you can either run it directly:
+
+```bash
+poetry run gc
+```
+
+or you can build and install it:
+
+```bash
+poetry build
+pipx install dist/git_commander-0.1.0-py3-none-any.whl
+```
+
+Then you can run it from anywhere with:
+
+```bash
+gc.exe
+```
+
+I will eventually be submitting this project to [PyPI](https://pypi.org/) once I think it is ready, but that is not for a while.
+
+
+Git Commander will store a single config file with your list of repos.
 This is stored here: `$(PKG_CONFIG_PATH:~/.config/GitCommander)/repos.dat`. 
