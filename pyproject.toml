@@ -1,6 +1,6 @@
 [project]
 name = "git-commander"
-version = "0.1.0"
+version = "0.1.1a0"
 description = "A basic tool for managing multiple git repositories."
 authors = [
     {name = "Jim Hessin",email = "jhessin@gmail.com"}
