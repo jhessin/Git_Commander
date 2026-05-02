@@ -30,7 +30,7 @@ class Threader:
             result = subprocess.run(cmd,
                                     capture_output=True,
                                     text=True,
-                                    check=True, *args, **kwargs
+                                    *args, **kwargs
                                     )
             wx.CallAfter(self.frame.log_window.AppendText, result.stdout)
             wx.CallAfter(self.frame.finished)
