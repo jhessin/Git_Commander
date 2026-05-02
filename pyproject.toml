@@ -3,7 +3,7 @@ name = "git-commander"
 version = "0.1.1a0"
 description = "A basic tool for managing multiple git repositories."
 authors = [
-    {name = "Jim Hessin",email = "jhessin@gmail.com"}
+    { name = "Jim Hessin", email = "jhessin@gmail.com" }
 ]
 license = "MIT"
 readme = "README.md"
@@ -14,10 +14,10 @@ dependencies = [
 ]
 
 [tool.poetry]
-packages = [{include = "src"}]
+packages = [{ include = "src" }]
 
 [tool.poetry.scripts]
-gc = "src.__main__:main"
+gc = "src.main:main"
 
 
 [build-system]
