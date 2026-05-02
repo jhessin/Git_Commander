@@ -48,21 +48,24 @@ poetry install
 Afterward you can either run it directly:
 
 ```bash
-poetry run gc
+poetry run git-commander
 ```
 
 or you can build and install it:
 
 ```bash
 poetry build
-pipx install dist/git_commander-0.1.0-py3-none-any.whl
+pipx install dist/git_commander-(VERSION_NUMBER).whl
 ```
 
 Then you can run it from anywhere with:
 
 ```bash
-gc.exe
+git-commander
 ```
+
+Also you can now run the program directly. If you installed with pipx
+you can find the executable in `~/.local/bin`
 
 Git Commander will store a single config file with your list of repos.
 This is stored here: `$(PKG_CONFIG_PATH:~/.config/GitCommander)/repos.dat`. 

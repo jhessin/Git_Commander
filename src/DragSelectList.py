@@ -5,7 +5,7 @@ class DragSelectList(wx.ListCtrl):
     """My custom list view that has drag selection"""
 
     def __init__(self, parent):
-        super().__init__(parent, wx.ID_ANY, style=wx.LC_HRULES | wx.LC_REPORT | wx.LC_VRULES)
+        super().__init__(parent, wx.ID_ANY, style=wx.LC_HRULES | wx.LC_REPORT | wx.LC_VRULES | wx.LC_SORT_ASCENDING)
         self.Bind(wx.EVT_LEFT_DOWN, self.on_left_down)
         self.Bind(wx.EVT_MOTION, self.on_mouse_drag)
         self.start_item = None
