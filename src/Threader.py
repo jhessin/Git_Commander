@@ -3,7 +3,7 @@ from typing import TYPE_CHECKING, Coroutine, Any, AsyncGenerator
 if TYPE_CHECKING:
     from MainFrame import MainFrame
 
-from constants import Consts
+from .constants import Consts
 import asyncio
 import os
 import subprocess

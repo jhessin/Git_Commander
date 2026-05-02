@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/Git_Commander.iml" filepath="$PROJECT_DIR$/.idea/Git_Commander.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/git-commander.iml" filepath="$PROJECT_DIR$/.idea/git-commander.iml" />
     </modules>
   </component>
 </project>
