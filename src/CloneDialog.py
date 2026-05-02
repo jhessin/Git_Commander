@@ -9,6 +9,7 @@ import wx
 # end wxGlade
 
 # begin wxGlade: extracode
+from . import constants as const
 # end wxGlade
 
 
@@ -28,20 +29,21 @@ class CloneDialog(wx.Dialog):
     self.gh_list.AppendColumn("Repo Name", format=wx.LIST_FORMAT_LEFT, width=181)
     sizer_field_vert.Add(self.gh_list, 1, wx.EXPAND, 0)
 
-    sizer_repo_select = wx.BoxSizer(wx.HORIZONTAL)
-    sizer_field_vert.Add(sizer_repo_select, 0, wx.ALIGN_RIGHT, 0)
+    sizer_alt_repo_entry = wx.BoxSizer(wx.HORIZONTAL)
+    sizer_field_vert.Add(sizer_alt_repo_entry, 0, wx.ALIGN_RIGHT, 0)
 
-    label_1 = wx.StaticText(self, wx.ID_ANY, "or enter url:")
-    sizer_repo_select.Add(label_1, 1, wx.EXPAND, 0)
+    url_prompt = wx.StaticText(self, wx.ID_ANY, "or enter url:")
+    sizer_alt_repo_entry.Add(url_prompt, 1, wx.EXPAND, 0)
 
-    self.text_ctrl_1 = wx.TextCtrl(self, wx.ID_ANY, "")
-    sizer_repo_select.Add(self.text_ctrl_1, 9, wx.EXPAND, 0)
+    self.text_ctrl_url = wx.TextCtrl(self, wx.ID_ANY, "")
+    sizer_alt_repo_entry.Add(self.text_ctrl_url, 9, wx.EXPAND, 0)
 
     sizer_repo_select_copy = wx.BoxSizer(wx.HORIZONTAL)
     sizer_field_vert.Add(sizer_repo_select_copy, 0, wx.EXPAND | wx.FIXED_MINSIZE, 0)
 
-    self.btn_select_dest = wx.Button(self, wx.ID_ANY, "...")
-    self.btn_select_dest.SetMinSize((75, 23))
+    self.btn_select_dest = wx.Button(self, wx.ID_ANY, "const.REPOS_DIRECTORY")
+    self.btn_select_dest.SetMinSize(wx.Size(75, 23))
+    self.btn_select_dest.SetLabel(const.REPOS_DIRECTORY)
     sizer_repo_select_copy.Add(self.btn_select_dest, 1, wx.EXPAND, 0)
 
     sizer_dlg_buttons = wx.StdDialogButtonSizer()
@@ -64,6 +66,15 @@ class CloneDialog(wx.Dialog):
     self.SetEscapeId(self.btn_cancel.GetId())
 
     self.Layout()
+
+    self.btn_select_dest.Bind(wx.EVT_BUTTON, self.select_repos_directory)
     # end wxGlade
 
+  def select_repos_directory(self, event: wx.CommandEvent):  # wxGlade: CloneDialog.<event_handler>
+    with wx.DirDialog(self, "Choose a directory") as dlg:
+      if dlg.ShowModal() == wx.ID_OK:
+        # Get the selected directory path
+        selected_dir = dlg.GetPath()
+        self.btn_select_dest.SetLabel(selected_dir)
+    event.Skip()
 # end of class CloneDialog
