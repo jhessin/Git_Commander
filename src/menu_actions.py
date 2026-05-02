@@ -3,6 +3,8 @@ from typing import TYPE_CHECKING
 
 import wx
 
+from .CloneDialog import CloneDialog
+
 if TYPE_CHECKING:
     from MainFrame import MainFrame
 
@@ -33,6 +35,20 @@ async def _final_save(frame: MainFrame):
 def save_task(frame: MainFrame):
     frame.SetStatusText("Saving...")
     frame.threader.run_async_task(_save(frame))
+
+def clone_task(frame: MainFrame):
+    frame.SetStatusText("Cloning...")
+    with CloneDialog(frame) as dlg:
+        result = dlg.ShowModal()
+        if result == wx.ID_OK:
+            if dlg.url_type == 'GH':
+                path = frame.threader.clone_with_gh(dlg.url, dlg.target_directory)
+            else:
+                path = frame.threader.clone_repo(dlg.url, dlg.target_directory)
+            frame.list_all_repos.add_item(path)
+        else:
+            frame.finished()
+        dlg.Destroy()
 
 
 def load_task(frame: MainFrame):

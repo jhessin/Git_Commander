@@ -232,6 +232,8 @@ class MainFrame(wx.Frame):
 
         load_item = file_menu.Append(wx.ID_ANY, "&Load\tCtrl-L", "Load the previously saved list of repositories")
         save_item = file_menu.Append(wx.ID_SAVE, "&Save\tCtrl-S", "Save the current list of repositories")
+        file_menu.AppendSeparator()
+        clone_item = file_menu.Append(wx.ID_ANY, "&Clone\tCtrl-C", "Clone a repository")
 
         menu_bar.Append(file_menu, "&File")
 
@@ -240,6 +242,7 @@ class MainFrame(wx.Frame):
         self.Bind(wx.EVT_MENU, lambda _: menu_actions.load_task(self), load_item)
         # AsyncBind(wx.EVT_MENU, menu_actions.load_task, self, load_item)
         self.Bind(wx.EVT_MENU, lambda _: menu_actions.save_task(self), save_item)
+        self.Bind(wx.EVT_MENU, lambda _: menu_actions.clone_task(self), clone_item)
         # AsyncBind(wx.EVT_MENU, menu_actions.save_task, self, save_item)
 
     def show_log(self):
