@@ -12,6 +12,13 @@ import wx
 from datetime import datetime
 from pickle import dump, load, HIGHEST_PROTOCOL
 
+import sys
+
+if sys.platform == "win32":
+    CREATE_NO_WINDOW = subprocess.CREATE_NO_WINDOW
+else:
+    CREATE_NO_WINDOW = 0
+
 
 class Threader:
     frame: MainFrame
@@ -30,6 +37,7 @@ class Threader:
             result = subprocess.run(cmd,
                                     capture_output=True,
                                     text=True,
+                                    creationflags=CREATE_NO_WINDOW,
                                     *args, **kwargs
                                     )
             wx.CallAfter(self.frame.log_window.AppendText, result.stdout)
@@ -154,7 +162,7 @@ class Threader:
         except json.decoder.JSONDecodeError as e:
             return [('gh was not installed or not logged in', str(e))]
 
-    def clone_repo(self, repo_url: str, target_dir: str = consts.REPOS_DIRECTORY):
+    def clone_repo(self, repo_url: str, target_dir: str = consts.REPOS_DIRECTORY) -> str:
         f"""
         Clones the given repo using the git command
         :param repo_url: The url of the repo to clone.
@@ -165,6 +173,7 @@ class Threader:
         path = os.path.join(target_dir, repo_url.split("/")[-1])
         print(f"cloning repo {repo_url} to {path}")
         self.run_subprocess(["git", "clone", repo_url, path])
+        return path
 
     def clone_with_gh(self, repo_name: str, target_dir: str = consts.REPOS_DIRECTORY) -> str:
         f"""

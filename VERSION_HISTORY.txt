@@ -1,0 +1,2 @@
+0.1.0           Initial Pre-Release
+0.1.1a1         Added clone repo menu item
