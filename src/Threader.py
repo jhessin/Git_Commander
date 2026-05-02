@@ -3,7 +3,7 @@ from typing import TYPE_CHECKING, Coroutine, Any, AsyncGenerator
 if TYPE_CHECKING:
     from MainFrame import MainFrame
 
-from .constants import Consts
+from . import constants as consts
 import asyncio
 import os
 import subprocess
@@ -50,8 +50,8 @@ class Threader:
             then a list containing working repositories.
         """
         try:
-            if os.path.exists(Consts.PICKLE_FILE):
-                with open(Consts.PICKLE_FILE, "rb") as f:
+            if os.path.exists(consts.PICKLE_FILE):
+                with open(consts.PICKLE_FILE, "rb") as f:
                     return load(f)
         except FileNotFoundError:
             return [], []
@@ -64,7 +64,7 @@ class Threader:
             then a list containing working repositories.
         :return: None
         """
-        with open(Consts.PICKLE_FILE, "wb") as f:
+        with open(consts.PICKLE_FILE, "wb") as f:
             dump(repos, f, HIGHEST_PROTOCOL)
 
     def push_repo(self, path: str, force: bool = False):
@@ -88,7 +88,7 @@ class Threader:
         self.run_subprocess(["git", "pull"], cwd=path)
 
     @staticmethod
-    async def _repo_search() -> AsyncGenerator[tuple[str, str], None]:
+    async def _repo_search() -> AsyncGenerator[str, None]:
         """Scans the users home folder for repositories."""
         home = os.path.expanduser("~")
         repo_list = []
@@ -109,7 +109,7 @@ class Threader:
     def reset_repo(path: str, force: bool = False):
         print(f"Resetting repository {path}")
         cmd = ["git", "reset", "--hard"] if force else ["git", "reset"]
-        self._run_subprocess(cmd, cwd=path)
+        subprocess.run(cmd, cwd=path)
 
     async def _scan_for_repos(self):
         """
@@ -134,15 +134,45 @@ class Threader:
             self.frame.SetStatusText("Scanning...")
             self.run_async_task(self._scan_for_repos())
 
-    def clone(self, repo_name: str) -> str:
-        """
-        Clones the given repo using the GitHub cli
-        :param repo_name: The name of the repo from GitHub
+    @staticmethod
+    def get_gh_repos() -> list[tuple[str, str]]:
+        import json
+
+        command = ['gh', 'repo', 'list', '--json', 'name', '--json', 'description']
+        result = subprocess.run(command, capture_output=True, text=True)
+        json_output = result.stdout.strip()
+
+        try:
+            result = []
+            data = json.loads(json_output)
+            for repo in data:
+                result.append((repo['name'], repo['description']))
+            return result
+        except json.decoder.JSONDecodeError as e:
+            return [('gh was not installed or not logged in', str(e))]
+
+    def clone_repo(self, repo_url: str, target_dir: str = consts.REPOS_DIRECTORY):
+        f"""
+        Clones the given repo using the git command
+        :param repo_url: The url of the repo to clone.
+        :param target_dir: The directory to clone the repo to defaults to ${consts.REPOS_DIRECTORY}
         :return: The directory the repo was cloned to.
         """
-        print(Consts.REPOS_DIRECTORY)
-        os.makedirs(Consts.REPOS_DIRECTORY, exist_ok=True)
-        path = os.path.join(Consts.REPOS_DIRECTORY, repo_name.split("/")[-1])
+        os.makedirs(target_dir, exist_ok=True)
+        path = os.path.join(target_dir, repo_url.split("/")[-1])
+        print(f"cloning repo {repo_url} to {path}")
+        self.run_subprocess(["git", "clone", repo_url, path])
+
+    def clone_with_gh(self, repo_name: str, target_dir: str = consts.REPOS_DIRECTORY) -> str:
+        f"""
+        Clones the given repo using the GitHub cli
+        :param repo_name: The name of the repo from GitHub
+        :param target_dir: The directory to clone the repo to defaults to ${consts.REPOS_DIRECTORY}
+        :return: The directory the repo was cloned to.
+        """
+        # print(consts.REPOS_DIRECTORY)
+        os.makedirs(target_dir, exist_ok=True)
+        path = os.path.join(target_dir, repo_name.split("/")[-1])
         print(f"cloning repo {repo_name} to {path}")
         # self._run_subprocess(["gh", "repo", "clone", repo_name, path], check=True)
         self.run_subprocess(["gh", "repo", "clone", repo_name, path])

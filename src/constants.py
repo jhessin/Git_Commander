@@ -1,5 +1,7 @@
 import os
 import sys
+from symtable import Class
+from typing import Any, Type, cast
 
 
 def data_path(*relative_path: str) -> str:
@@ -20,15 +22,18 @@ class classproperty:
     def __init__(self, fget):
         self.fget = fget
 
-    def __get__(self, instance, owner):
+    def __get__(self, instance: Any, owner: Type[Any]) -> Any:
         return self.fget(owner)
 
 
 class Consts:
     @classproperty
-    def PICKLE_FILE(cls) -> str:
+    def PICKLE_FILE(self: Class) -> str:
         return data_path('repos.dat')
 
     @classproperty
-    def REPOS_DIRECTORY(cls) -> str:
+    def REPOS_DIRECTORY(self: Class) -> str:
         return os.path.join(os.path.expanduser("~"), "repos")
+
+PICKLE_FILE: str = cast(str, cast(object, Consts.PICKLE_FILE))
+REPOS_DIRECTORY: str = cast(str, cast(object, Consts.REPOS_DIRECTORY))
