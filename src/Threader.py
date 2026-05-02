@@ -76,7 +76,8 @@ class Threader:
         """
         date = datetime.now().strftime("%Y%m%d%H%M%S")
         subprocess.run(['git', 'add', '.'], cwd=path)
-        subprocess.run(['git', 'commit', f"-m {date}"], cwd=path)
+        result = subprocess.run(['git', 'commit', f"-m {date}"], cwd=path, capture_output=True, text=True, check=True)
+        self.frame.log_window.AppendText(result.stdout)
         self.run_subprocess(["git", "push", "-f"] if force else ["git", "push"], cwd=path)
 
     def pull_repo(self, path: str):
