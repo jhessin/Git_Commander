@@ -1,6 +1,6 @@
 [project]
 name = "git-commander"
-version = "0.1.1a1"
+version = "0.1.1b0"
 description = "A basic tool for managing multiple git repositories."
 authors = [
     { name = "Jim Hessin", email = "jhessin@gmail.com" }
@@ -21,9 +21,6 @@ cmd = "pyinstaller --onefile --windowed run.pyw"
 
 [tool.poetry]
 packages = [{ include = "src" }]
-
-[tool.poetry.scripts]
-gc = "src.main:main"
 
 [tool.poetry.plugins."gui-scripts"]
 git-commander = "src.main:main"
