@@ -12,6 +12,13 @@ import wx
 from datetime import datetime
 from pickle import dump, load, HIGHEST_PROTOCOL
 
+import sys
+
+if sys.platform == "win32":
+    CREATE_NO_WINDOW = subprocess.CREATE_NO_WINDOW
+else:
+    CREATE_NO_WINDOW = 0
+
 
 class Threader:
     frame: MainFrame
@@ -30,6 +37,7 @@ class Threader:
             result = subprocess.run(cmd,
                                     capture_output=True,
                                     text=True,
+                                    creationflags=CREATE_NO_WINDOW,
                                     *args, **kwargs
                                     )
             wx.CallAfter(self.frame.log_window.AppendText, result.stdout)
