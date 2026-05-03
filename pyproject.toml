@@ -1,6 +1,6 @@
 [project]
 name = "git-commander"
-version = "0.1.1a1"
+version = "0.1.1b0-1"
 description = "A basic tool for managing multiple git repositories."
 authors = [
     { name = "Jim Hessin", email = "jhessin@gmail.com" }
@@ -19,11 +19,12 @@ cmd = "pythonw -m src"
 [tool.poe.tasks.build]
 cmd = "pyinstaller --onefile --windowed run.pyw"
 
+[tool.poe.tasks.update]
+cmd = "git tag -n"
+capture_stdout = "VERSION_HISTORY.txt"
+
 [tool.poetry]
 packages = [{ include = "src" }]
-
-[tool.poetry.scripts]
-gc = "src.main:main"
 
 [tool.poetry.plugins."gui-scripts"]
 git-commander = "src.main:main"
