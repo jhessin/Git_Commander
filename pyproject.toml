@@ -7,11 +7,17 @@ authors = [
 ]
 license = "MIT"
 readme = "README.md"
-requires-python = ">=3.14"
+requires-python = ">=3.14,<3.15"
 dependencies = [
     "wxpython (>=4.2.5,<5.0.0)",
-    "wxasync (>=0.49,<0.50)"
+    "wxasync (>=0.49,<0.50)",
 ]
+
+[tool.poe.tasks.gui]
+cmd = "pythonw -m src"
+
+[tool.poe.tasks.build]
+cmd = "pyinstaller --onefile --windowed run.pyw"
 
 [tool.poetry]
 packages = [{ include = "src" }]
@@ -19,7 +25,15 @@ packages = [{ include = "src" }]
 [tool.poetry.scripts]
 gc = "src.main:main"
 
+[tool.poetry.plugins."gui-scripts"]
+git-commander = "src.main:main"
 
 [build-system]
 requires = ["poetry-core>=2.0.0,<3.0.0"]
 build-backend = "poetry.core.masonry.api"
+
+[dependency-groups]
+dev = [
+    "poethepoet (>=0.45.0,<0.46.0)",
+    "pyinstaller (>=6.20.0,<7.0.0)"
+]
