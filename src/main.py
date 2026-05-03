@@ -21,7 +21,7 @@ async def main_async():
     await app.MainLoop()
 
 def main(*args, **kwargs) -> None:
-    asyncio.run(main_async())
+    return asyncio.run(main_async())
 
 
 if __name__ == "__main__":
