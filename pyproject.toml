@@ -19,6 +19,10 @@ cmd = "pythonw -m src"
 [tool.poe.tasks.build]
 cmd = "pyinstaller --onefile --windowed run.pyw"
 
+[tool.poe.tasks.update]
+cmd = "git tag -n"
+capture_stdout = "VERSION_HISTORY.txt"
+
 [tool.poetry]
 packages = [{ include = "src" }]
 
