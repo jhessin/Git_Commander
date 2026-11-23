@@ -38,7 +38,7 @@ Once that is done you can install it with pipx
 pipx install git-commander
 ```
 
-To get the current test version you can clone this repository and use 
+To get the current test version you can clone this repository and use
 [Poetry](https://python-poetry.org/) to install it
 
 ```bash
@@ -68,4 +68,17 @@ Also you can now run the program directly. If you installed with pipx
 you can find the executable in `~/.local/bin`
 
 Git Commander will store a single config file with your list of repos.
-This is stored here: `$(PKG_CONFIG_PATH:~/.config/GitCommander)/repos.dat`. 
+This is stored here: `$(PKG_CONFIG_PATH:~/.config/GitCommander)/repos.dat`.
+
+## Support
+
+Git_Commander is free and open source, built and maintained on my own time.
+If it saves you time wrangling Git repos, consider supporting its development —
+contributions go toward the time I spend fixing bugs, adding features, and
+keeping it working across platforms.
+
+- [GitHub Sponsors](https://github.com/sponsors/jhessin)
+- [Ko-fi](https://ko-fi.com/jhessin)
+- [Buy Me a Coffee](https://www.buymeacoffee.com/jhessin)
+
+Bug reports, ideas, and pull requests help just as much. Thank you!
