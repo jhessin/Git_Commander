@@ -5,7 +5,7 @@ When you just want to Git stuff done!
 Git Commander is a simple UI that can be used to pull and push multiple git
 repos for you so you can just focus on working. This software is provided as is
 and will add all files to your repos with a simple timestamp commit. Use with
-caution as this can push things to github that you didn't intend to push.
+caution as this can push things to GitHub that you didn't intend to push.
 
 It is open-sourced and you can see everything it does.
 
@@ -30,7 +30,8 @@ collaboration, but for multi-computer colaboration.
 ## Installation
 
 To install Git Commander you first need to have git (obviously) and the [Github
-Cli tool](https://cli.github.com/) will eventually be used for cloning your repositories.
+command-line tool](https://cli.github.com/) will eventually be used for cloning
+your repositories.
 
 Once that is done you can install it with pipx
 
